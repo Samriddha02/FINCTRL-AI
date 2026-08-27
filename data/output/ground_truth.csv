@@ -1,0 +1,101 @@
+case_id,ground_truth_status,ground_truth_root_cause,ground_truth_expected_amount,ground_truth_actual_amount,ground_truth_should_auto_resolve
+CASE-00001,TAX_MISMATCH,Tax record tax amount (12203.45) disagrees with invoice tax (18305.17).,18305.17,12203.45,False
+CASE-00002,EXACT_MATCH,All financial records match perfectly across all systems.,4881.11,4881.11,True
+CASE-00003,EXACT_MATCH,All financial records match perfectly across all systems.,1221.44,1221.44,True
+CASE-00004,EXACT_MATCH,All financial records match perfectly across all systems.,4881.52,4881.52,True
+CASE-00005,TAX_MISMATCH,Tax record tax amount (762.67) disagrees with invoice tax (1144.00).,1144.00,762.67,False
+CASE-00006,PARTIAL_REFUND,Valid partial refund of INR 499.85 processed cleanly.,1940.41,1940.41,True
+CASE-00007,AMBIGUOUS_CASE,Bank transaction references vague bulk transfer batch ID matching multiple candidates.,11716.87,11716.87,False
+CASE-00008,EXACT_MATCH,All financial records match perfectly across all systems.,488.84,488.84,True
+CASE-00009,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,4881.52,9763.04,False
+CASE-00010,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,537020.10,527285.10,False
+CASE-00011,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,7322.27,7322.27,True
+CASE-00012,CONFLICTING_RECORDS,Order status is CANCELLED but payment succeeded and was settled without refund.,0.00,7499.58,False
+CASE-00013,UNKNOWN_ADJUSTMENT,Settlement includes unexplained negative adjustment of -450.00.,1221.17,771.17,False
+CASE-00014,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,1220.80,2441.60,False
+CASE-00015,EXACT_MATCH,All financial records match perfectly across all systems.,537020.81,537020.81,True
+CASE-00016,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,1220.67,1220.67,True
+CASE-00017,CONFLICTING_RECORDS,Order status is CANCELLED but payment succeeded and was settled without refund.,0.00,7499.36,False
+CASE-00018,AMBIGUOUS_CASE,Bank transaction references vague bulk transfer batch ID matching multiple candidates.,117168.61,117168.61,False
+CASE-00019,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,7499.05,0.00,False
+CASE-00020,AMBIGUOUS_CASE,Bank transaction references vague bulk transfer batch ID matching multiple candidates.,2440.94,2440.94,False
+CASE-00021,EXACT_MATCH,All financial records match perfectly across all systems.,1220.59,1220.59,True
+CASE-00022,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,24410.16,23967.65,False
+CASE-00023,EXACT_MATCH,All financial records match perfectly across all systems.,4881.87,4881.87,True
+CASE-00024,EXACT_MATCH,All financial records match perfectly across all systems.,537020.93,537020.93,True
+CASE-00025,EXACT_MATCH,All financial records match perfectly across all systems.,488.42,488.42,True
+CASE-00026,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,7322.22,7322.22,True
+CASE-00027,EXACT_MATCH,All financial records match perfectly across all systems.,4881.59,4881.59,True
+CASE-00028,EXACT_MATCH,All financial records match perfectly across all systems.,4881.52,4881.52,True
+CASE-00029,EXACT_MATCH,All financial records match perfectly across all systems.,117168.50,117168.50,True
+CASE-00030,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,2440.75,2440.75,True
+CASE-00031,CONFLICTING_RECORDS,Order status is CANCELLED but payment succeeded and was settled without refund.,0.00,12000.93,False
+CASE-00032,EXACT_MATCH,All financial records match perfectly across all systems.,24410.72,24410.72,True
+CASE-00033,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,488.85,479.99,False
+CASE-00034,EXACT_MATCH,All financial records match perfectly across all systems.,11717.57,11717.57,True
+CASE-00035,PARTIAL_REFUND,Valid partial refund of INR 5000.08 processed cleanly.,19410.32,19410.32,True
+CASE-00036,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,24410.83,23968.31,False
+CASE-00037,AMOUNT_MISMATCH,Settlement gross amount (23750.67) does not match payment amount (25000.70).,24410.69,23160.66,False
+CASE-00038,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,537020.75,537020.75,True
+CASE-00039,PARTIAL_REFUND,Valid partial refund of INR 24000.12 processed cleanly.,93168.47,93168.47,True
+CASE-00040,EXACT_MATCH,All financial records match perfectly across all systems.,1221.44,1221.44,True
+CASE-00041,PARTIAL_REFUND,Valid partial refund of INR 100.01 processed cleanly.,388.24,388.24,True
+CASE-00042,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,24410.78,23968.26,False
+CASE-00043,TAX_MISMATCH,Tax record tax amount (4932.26) disagrees with invoice tax (7398.38).,7398.38,4932.26,False
+CASE-00044,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,1221.47,2442.94,False
+CASE-00045,UNKNOWN_ADJUSTMENT,Settlement includes unexplained negative adjustment of -450.00.,488.90,38.90,False
+CASE-00046,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,117168.70,115044.69,False
+CASE-00047,PARTIAL_REFUND,Valid partial refund of INR 24000.11 processed cleanly.,93168.45,93168.45,True
+CASE-00048,PARTIAL_REFUND,Valid partial refund of INR 1500.00 processed cleanly.,5822.98,5822.98,True
+CASE-00049,EXACT_MATCH,All financial records match perfectly across all systems.,47355.49,47355.49,True
+CASE-00050,TAX_MISMATCH,Tax record tax amount (12203.40) disagrees with invoice tax (18305.10).,18305.10,12203.40,False
+CASE-00051,EXACT_MATCH,All financial records match perfectly across all systems.,4881.10,4881.10,True
+CASE-00052,AMOUNT_MISMATCH,Settlement gross amount (23750.07) does not match payment amount (25000.07).,24410.07,23160.07,False
+CASE-00053,EXACT_MATCH,All financial records match perfectly across all systems.,537020.47,537020.47,True
+CASE-00054,AMOUNT_MISMATCH,Settlement gross amount (23750.65) does not match payment amount (25000.68).,24410.67,23160.64,False
+CASE-00055,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,7322.56,7322.56,True
+CASE-00056,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,2499.59,0.00,False
+CASE-00057,EXACT_MATCH,All financial records match perfectly across all systems.,537020.71,537020.71,True
+CASE-00058,EXACT_MATCH,All financial records match perfectly across all systems.,47355.63,47355.63,True
+CASE-00059,TAX_MISMATCH,Tax record tax amount (4932.24) disagrees with invoice tax (7398.37).,7398.37,4932.24,False
+CASE-00060,PARTIAL_REFUND,Valid partial refund of INR 250.12 processed cleanly.,970.97,970.97,True
+CASE-00061,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,1250.99,0.00,False
+CASE-00062,UNKNOWN_ADJUSTMENT,Settlement includes unexplained negative adjustment of -450.00.,537020.19,536570.19,False
+CASE-00063,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,537020.26,527285.26,False
+CASE-00064,UNKNOWN_ADJUSTMENT,Settlement includes unexplained negative adjustment of -450.00.,2440.40,1990.40,False
+CASE-00065,EXACT_MATCH,All financial records match perfectly across all systems.,24410.89,24410.89,True
+CASE-00066,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,1221.37,1199.23,False
+CASE-00067,EXACT_MATCH,All financial records match perfectly across all systems.,11717.47,11717.47,True
+CASE-00068,EXACT_MATCH,All financial records match perfectly across all systems.,488.72,488.72,True
+CASE-00069,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,2440.56,2440.56,True
+CASE-00070,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,48500.55,0.00,False
+CASE-00071,EXACT_MATCH,All financial records match perfectly across all systems.,47355.70,47355.70,True
+CASE-00072,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,12000.03,0.00,False
+CASE-00073,EXACT_MATCH,All financial records match perfectly across all systems.,11717.12,11717.12,True
+CASE-00074,AMOUNT_MISMATCH,Settlement gross amount (114000.01) does not match payment amount (120000.01).,117168.01,111168.01,False
+CASE-00075,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,47356.10,94712.20,False
+CASE-00076,EXACT_MATCH,All financial records match perfectly across all systems.,47355.42,47355.42,True
+CASE-00077,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,7322.84,14645.68,False
+CASE-00078,AMOUNT_MISMATCH,Settlement gross amount (23750.90) does not match payment amount (25000.95).,24410.93,23160.88,False
+CASE-00079,EXACT_MATCH,All financial records match perfectly across all systems.,7322.40,7322.40,True
+CASE-00080,EXACT_MATCH,All financial records match perfectly across all systems.,11716.95,11716.95,True
+CASE-00081,PARTIAL_REFUND,Valid partial refund of INR 1499.98 processed cleanly.,5822.94,5822.94,True
+CASE-00082,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,7322.30,7189.56,False
+CASE-00083,EXACT_MATCH,All financial records match perfectly across all systems.,7322.07,7322.07,True
+CASE-00084,EXACT_MATCH,All financial records match perfectly across all systems.,47355.53,47355.53,True
+CASE-00085,TIMING_DIFFERENCE,Bank transaction posted 15 days after settlement date.,47355.82,47355.82,True
+CASE-00086,PARTIAL_REFUND,Valid partial refund of INR 250.10 processed cleanly.,970.90,970.90,True
+CASE-00087,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,2440.21,4880.42,False
+CASE-00088,EXACT_MATCH,All financial records match perfectly across all systems.,117168.95,117168.95,True
+CASE-00089,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,120000.48,0.00,False
+CASE-00090,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,7499.72,0.00,False
+CASE-00091,EXACT_MATCH,All financial records match perfectly across all systems.,4881.34,4881.34,True
+CASE-00092,FEE_DIFFERENCE,Gateway fee charged at 3.5% instead of contracted 2.0%.,2440.02,2395.79,False
+CASE-00093,EXACT_MATCH,All financial records match perfectly across all systems.,7322.06,7322.06,True
+CASE-00094,EXACT_MATCH,All financial records match perfectly across all systems.,1221.35,1221.35,True
+CASE-00095,DUPLICATE_TRANSACTION,Duplicate credit entry posted to bank ledger for single settlement.,24410.14,48820.28,False
+CASE-00096,MISSING_SETTLEMENT,Payment captured in gateway but missing from settlement report.,2499.09,0.00,False
+CASE-00097,AMOUNT_MISMATCH,Settlement gross amount (46075.14) does not match payment amount (48500.15).,47355.55,44930.54,False
+CASE-00098,PARTIAL_REFUND,Valid partial refund of INR 24000.14 processed cleanly.,93168.54,93168.54,True
+CASE-00099,AMOUNT_MISMATCH,Settlement gross amount (23750.89) does not match payment amount (25000.94).,24410.92,23160.87,False
+CASE-00100,EXACT_MATCH,All financial records match perfectly across all systems.,4881.86,4881.86,True

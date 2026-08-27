@@ -1,0 +1,81 @@
+customer_id,customer_name,email,created_at
+CUST-0001,Siddharth Verma,siddharth.verma1@synthmail.com,2026-01-01 00:00:00
+CUST-0002,Kavya Iyer,kavya.iyer2@synthmail.com,2025-12-25 00:00:00
+CUST-0003,BlueSky Enterprises Pvt Ltd,finance@blueskyenterprises.in,2025-12-28 00:00:00
+CUST-0004,Kavya Verma,kavya.verma4@synthmail.com,2025-12-11 00:00:00
+CUST-0005,Kavya Singh,kavya.singh5@synthmail.com,2025-12-15 00:00:00
+CUST-0006,Kaveri Retailers Pvt Ltd,finance@kaveriretailers.in,2025-12-14 00:00:00
+CUST-0007,Rahul Sharma,rahul.sharma7@synthmail.com,2026-01-01 00:00:00
+CUST-0008,Ananya Deshmukh,ananya.deshmukh8@synthmail.com,2025-12-25 00:00:00
+CUST-0009,Omicron Media Pvt Ltd,finance@omicronmedia.in,2025-12-13 00:00:00
+CUST-0010,Aarav Chowdhury,aarav.chowdhury10@synthmail.com,2025-12-26 00:00:00
+CUST-0011,Kavya Joshi,kavya.joshi11@synthmail.com,2025-12-10 00:00:00
+CUST-0012,Omicron Media Pvt Ltd,finance@omicronmedia.in,2025-12-19 00:00:00
+CUST-0013,Priya Gupta,priya.gupta13@synthmail.com,2025-12-14 00:00:00
+CUST-0014,Vikram Bhat,vikram.bhat14@synthmail.com,2025-12-05 00:00:00
+CUST-0015,Apex Solutions Pvt Ltd,finance@apexsolutions.in,2025-12-08 00:00:00
+CUST-0016,Amit Patel,amit.patel16@synthmail.com,2025-12-10 00:00:00
+CUST-0017,Rahul Nair,rahul.nair17@synthmail.com,2025-12-24 00:00:00
+CUST-0018,TechPulse Systems Pvt Ltd,finance@techpulsesystems.in,2025-12-26 00:00:00
+CUST-0019,Amit Nair,amit.nair19@synthmail.com,2025-12-29 00:00:00
+CUST-0020,Ananya Reddy,ananya.reddy20@synthmail.com,2025-12-29 00:00:00
+CUST-0021,Nova Software Pvt Ltd,finance@novasoftware.in,2025-12-05 00:00:00
+CUST-0022,Neha Mehta,neha.mehta22@synthmail.com,2025-12-24 00:00:00
+CUST-0023,Amit Sharma,amit.sharma23@synthmail.com,2025-12-09 00:00:00
+CUST-0024,Nexus Traders Pvt Ltd,finance@nexustraders.in,2025-12-15 00:00:00
+CUST-0025,Ananya Singh,ananya.singh25@synthmail.com,2025-12-20 00:00:00
+CUST-0026,Ananya Chowdhury,ananya.chowdhury26@synthmail.com,2025-12-23 00:00:00
+CUST-0027,Solstice Tech Pvt Ltd,finance@solsticetech.in,2025-12-13 00:00:00
+CUST-0028,Manish Rao,manish.rao28@synthmail.com,2025-12-21 00:00:00
+CUST-0029,Pooja Deshmukh,pooja.deshmukh29@synthmail.com,2025-12-10 00:00:00
+CUST-0030,Kaveri Retailers Pvt Ltd,finance@kaveriretailers.in,2025-12-31 00:00:00
+CUST-0031,Siddharth Deshmukh,siddharth.deshmukh31@synthmail.com,2025-12-08 00:00:00
+CUST-0032,Vikram Verma,vikram.verma32@synthmail.com,2025-12-05 00:00:00
+CUST-0033,BlueSky Enterprises Pvt Ltd,finance@blueskyenterprises.in,2025-12-05 00:00:00
+CUST-0034,Ananya Reddy,ananya.reddy34@synthmail.com,2025-12-24 00:00:00
+CUST-0035,Sneha Joshi,sneha.joshi35@synthmail.com,2025-12-06 00:00:00
+CUST-0036,Nova Software Pvt Ltd,finance@novasoftware.in,2025-12-27 00:00:00
+CUST-0037,Neha Nair,neha.nair37@synthmail.com,2025-12-26 00:00:00
+CUST-0038,Siddharth Iyer,siddharth.iyer38@synthmail.com,2025-12-10 00:00:00
+CUST-0039,Solstice Tech Pvt Ltd,finance@solsticetech.in,2025-12-12 00:00:00
+CUST-0040,Ananya Mehta,ananya.mehta40@synthmail.com,2025-12-12 00:00:00
+CUST-0041,Rohan Chowdhury,rohan.chowdhury41@synthmail.com,2025-12-09 00:00:00
+CUST-0042,BlueSky Enterprises Pvt Ltd,finance@blueskyenterprises.in,2025-12-27 00:00:00
+CUST-0043,Sneha Reddy,sneha.reddy43@synthmail.com,2025-12-24 00:00:00
+CUST-0044,Manish Joshi,manish.joshi44@synthmail.com,2025-12-10 00:00:00
+CUST-0045,Omicron Media Pvt Ltd,finance@omicronmedia.in,2025-12-25 00:00:00
+CUST-0046,Siddharth Nair,siddharth.nair46@synthmail.com,2025-12-06 00:00:00
+CUST-0047,Amit Bhat,amit.bhat47@synthmail.com,2025-12-31 00:00:00
+CUST-0048,BlueSky Enterprises Pvt Ltd,finance@blueskyenterprises.in,2025-12-06 00:00:00
+CUST-0049,Aarav Bhat,aarav.bhat49@synthmail.com,2025-12-22 00:00:00
+CUST-0050,Rahul Iyer,rahul.iyer50@synthmail.com,2025-12-30 00:00:00
+CUST-0051,BlueSky Enterprises Pvt Ltd,finance@blueskyenterprises.in,2025-12-03 00:00:00
+CUST-0052,Pooja Singh,pooja.singh52@synthmail.com,2025-12-10 00:00:00
+CUST-0053,Neha Deshmukh,neha.deshmukh53@synthmail.com,2025-12-12 00:00:00
+CUST-0054,Nexus Traders Pvt Ltd,finance@nexustraders.in,2025-12-20 00:00:00
+CUST-0055,Manish Singh,manish.singh55@synthmail.com,2025-12-12 00:00:00
+CUST-0056,Sneha Patel,sneha.patel56@synthmail.com,2025-12-24 00:00:00
+CUST-0057,TechPulse Systems Pvt Ltd,finance@techpulsesystems.in,2025-12-25 00:00:00
+CUST-0058,Kavya Chowdhury,kavya.chowdhury58@synthmail.com,2025-12-15 00:00:00
+CUST-0059,Vikram Kulkarni,vikram.kulkarni59@synthmail.com,2025-12-14 00:00:00
+CUST-0060,Vanguard Financial Pvt Ltd,finance@vanguardfinancial.in,2025-12-04 00:00:00
+CUST-0061,Pooja Reddy,pooja.reddy61@synthmail.com,2025-12-21 00:00:00
+CUST-0062,Priya Patel,priya.patel62@synthmail.com,2025-12-16 00:00:00
+CUST-0063,Nexus Traders Pvt Ltd,finance@nexustraders.in,2025-12-30 00:00:00
+CUST-0064,Amit Sharma,amit.sharma64@synthmail.com,2025-12-05 00:00:00
+CUST-0065,Ananya Patel,ananya.patel65@synthmail.com,2025-12-12 00:00:00
+CUST-0066,TechPulse Systems Pvt Ltd,finance@techpulsesystems.in,2025-12-07 00:00:00
+CUST-0067,Siddharth Reddy,siddharth.reddy67@synthmail.com,2025-12-13 00:00:00
+CUST-0068,Ananya Reddy,ananya.reddy68@synthmail.com,2025-12-20 00:00:00
+CUST-0069,Starlight Exports Pvt Ltd,finance@starlightexports.in,2025-12-18 00:00:00
+CUST-0070,Aditya Iyer,aditya.iyer70@synthmail.com,2025-12-15 00:00:00
+CUST-0071,Riya Sharma,riya.sharma71@synthmail.com,2025-12-11 00:00:00
+CUST-0072,Hyperion Global Pvt Ltd,finance@hyperionglobal.in,2025-12-29 00:00:00
+CUST-0073,Siddharth Singh,siddharth.singh73@synthmail.com,2025-12-15 00:00:00
+CUST-0074,Amit Iyer,amit.iyer74@synthmail.com,2025-12-08 00:00:00
+CUST-0075,Solstice Tech Pvt Ltd,finance@solsticetech.in,2025-12-22 00:00:00
+CUST-0076,Ananya Iyer,ananya.iyer76@synthmail.com,2025-12-19 00:00:00
+CUST-0077,Rohan Gupta,rohan.gupta77@synthmail.com,2026-01-01 00:00:00
+CUST-0078,Hyperion Global Pvt Ltd,finance@hyperionglobal.in,2025-12-04 00:00:00
+CUST-0079,Kavya Iyer,kavya.iyer79@synthmail.com,2025-12-16 00:00:00
+CUST-0080,Amit Patel,amit.patel80@synthmail.com,2025-12-16 00:00:00
