@@ -74,6 +74,18 @@ def get_payment_context(db: Session, payment_id: str) -> Dict[str, Any]:
     bank_txns = []
     if settlement:
         bank_txns = get_bank_transactions(db, settlement.settlement_id)
+        if not bank_txns:
+            # Query candidate bank transactions by net amount or vague reference
+            candidate_txns = (
+                db.query(BankTransaction)
+                .filter(
+                    (BankTransaction.amount == settlement.net_amount)
+                    | (BankTransaction.reference_id.like("%BULK%"))
+                    | (BankTransaction.reference_id.like("%BATCH%"))
+                )
+                .all()
+            )
+            bank_txns = candidate_txns
 
     invoice = get_invoice_by_order(db, payment.order_id)
     tax_record = get_tax_record(db, invoice.invoice_id) if invoice else None
