@@ -6,7 +6,7 @@ from app.api.reconciliation import router as reconciliation_router
 app = FastAPI(
     title="FINCTRL AI",
     description="The AI Finance Controller that investigates the books, not just reconciles them.",
-    version="0.4.0",
+    version="0.5.0",
 )
 
 # Enable CORS for frontend integration

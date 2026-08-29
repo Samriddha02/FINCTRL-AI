@@ -38,3 +38,6 @@ pnpm-debug.log*
 *.log
 tmp/
 scratch/
+
+# Regenerable multi-seed evaluation working datasets
+data/evaluation/

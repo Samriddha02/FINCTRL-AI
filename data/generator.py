@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 import random
@@ -5,6 +6,7 @@ import logging
 from decimal import Decimal, ROUND_HALF_UP
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Optional
 import pandas as pd
 import numpy as np
 
@@ -42,15 +44,19 @@ from data.models import (
 from data.validators import validate_dataset
 
 
-def setup_logging():
-    LOGS_DIR.mkdir(parents=True, exist_ok=True)
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    logging.basicConfig(
-        filename=LOG_FILE,
-        filemode="w",
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        level=logging.INFO,
-    )
+def setup_logging(log_dir: Optional[Path] = None):
+    target_log_dir = log_dir or LOGS_DIR
+    target_log_dir.mkdir(parents=True, exist_ok=True)
+    log_path = target_log_dir / "generation.log"
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    for handler in list(root.handlers):
+        if isinstance(handler, logging.FileHandler):
+            root.removeHandler(handler)
+            handler.close()
+    file_handler = logging.FileHandler(log_path, mode="w", encoding="utf-8")
+    file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+    root.addHandler(file_handler)
 
 
 def round_curr(val: Decimal) -> Decimal:
@@ -64,10 +70,12 @@ class FinancialDataGenerator:
         seed: int = SEED,
         num_cases: int = NUM_CASES,
         num_customers: int = NUM_CUSTOMERS,
+        output_dir: Optional[Path] = None,
     ):
         self.seed = seed
         self.num_cases = num_cases
         self.num_customers = num_customers
+        self.output_dir = Path(output_dir) if output_dir else OUTPUT_DIR
 
         # Set deterministic random seeds
         random.seed(self.seed)
@@ -664,7 +672,8 @@ class FinancialDataGenerator:
             self.ground_truth.append(gt)
 
     def generate_all(self):
-        setup_logging()
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        setup_logging(self.output_dir / "logs" if self.output_dir != OUTPUT_DIR else None)
         logging.info(f"Starting data generation with seed={self.seed}, num_cases={self.num_cases}")
         self.generate_customers()
         self.generate_cases()
@@ -696,17 +705,17 @@ class FinancialDataGenerator:
         )
 
         # Write to CSV files
-        pd.DataFrame(cust_dicts).to_csv(OUTPUT_FILES["customers"], index=False)
-        pd.DataFrame(ord_dicts).to_csv(OUTPUT_FILES["orders"], index=False)
-        pd.DataFrame(pay_dicts).to_csv(OUTPUT_FILES["payments"], index=False)
-        pd.DataFrame(ref_dicts).to_csv(OUTPUT_FILES["refunds"], index=False)
-        pd.DataFrame(set_dicts).to_csv(OUTPUT_FILES["settlements"], index=False)
-        pd.DataFrame(btx_dicts).to_csv(OUTPUT_FILES["bank_transactions"], index=False)
-        pd.DataFrame(inv_dicts).to_csv(OUTPUT_FILES["invoices"], index=False)
-        pd.DataFrame(tax_dicts).to_csv(OUTPUT_FILES["tax_records"], index=False)
-        pd.DataFrame(gt_dicts).to_csv(OUTPUT_FILES["ground_truth"], index=False)
+        pd.DataFrame(cust_dicts).to_csv(self.output_dir / "customers.csv", index=False)
+        pd.DataFrame(ord_dicts).to_csv(self.output_dir / "orders.csv", index=False)
+        pd.DataFrame(pay_dicts).to_csv(self.output_dir / "payments.csv", index=False)
+        pd.DataFrame(ref_dicts).to_csv(self.output_dir / "refunds.csv", index=False)
+        pd.DataFrame(set_dicts).to_csv(self.output_dir / "settlements.csv", index=False)
+        pd.DataFrame(btx_dicts).to_csv(self.output_dir / "bank_transactions.csv", index=False)
+        pd.DataFrame(inv_dicts).to_csv(self.output_dir / "invoices.csv", index=False)
+        pd.DataFrame(tax_dicts).to_csv(self.output_dir / "tax_records.csv", index=False)
+        pd.DataFrame(gt_dicts).to_csv(self.output_dir / "ground_truth.csv", index=False)
 
-        logging.info("All CSV files written successfully to data/output/")
+        logging.info(f"All CSV files written successfully to {self.output_dir}")
         self.print_summary()
 
     def print_summary(self):
@@ -731,9 +740,27 @@ class FinancialDataGenerator:
             print(f"  {k}: {v}")
 
         print("\nValidation: PASS")
-        print(f"\nOutput directory:\n  {OUTPUT_DIR}\n")
+        print(f"\nOutput directory:\n  {self.output_dir}\n")
+
+
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description="FINCTRL AI synthetic financial dataset generator")
+    parser.add_argument("--seed", type=int, default=SEED, help="Random seed (default: 42)")
+    parser.add_argument("--cases", type=int, default=NUM_CASES, help="Number of cases to generate")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Output directory (default: data/output). Use a separate path for evaluation datasets.",
+    )
+    return parser.parse_args(argv)
 
 
 if __name__ == "__main__":
-    generator = FinancialDataGenerator()
+    args = parse_args()
+    generator = FinancialDataGenerator(
+        seed=args.seed,
+        num_cases=args.cases,
+        output_dir=args.output_dir,
+    )
     generator.generate_all()

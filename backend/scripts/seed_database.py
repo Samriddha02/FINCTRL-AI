@@ -13,6 +13,8 @@ if str(backend_dir) not in sys.path:
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
+from sqlalchemy.orm import Session
+from sqlalchemy import text
 from app.core.database import SessionLocal
 from app.models import (
     Customer,
@@ -26,6 +28,10 @@ from app.models import (
 )
 
 DATA_OUTPUT_DIR = project_root / "data" / "output"
+TRUNCATE_SQL = (
+    "TRUNCATE TABLE tax_records, invoices, bank_transactions, settlements, "
+    "refunds, payments, orders, customers RESTART IDENTITY CASCADE"
+)
 
 
 def parse_datetime(val):
@@ -53,18 +59,31 @@ def parse_str(val):
     return s if s != "" else None
 
 
-def seed_database():
-    """Seeds the PostgreSQL database with Phase 2 synthetic financial data."""
-    print("Starting database seeding from Phase 2 CSV output...")
+def truncate_operational_tables(db: Session) -> None:
+    """Remove operational rows only. Does not drop the database, schema, or table definitions."""
+    db.execute(text(TRUNCATE_SQL))
+    db.flush()
 
-    if not DATA_OUTPUT_DIR.exists():
-        print(f"ERROR: Data output directory {DATA_OUTPUT_DIR} does not exist.")
-        sys.exit(1)
 
-    db = SessionLocal()
+def seed_from_directory(db: Session, data_dir, replace: bool = False) -> None:
+    """Load the eight operational CSVs into an existing session.
+
+    Ground truth is never ingested. When replace=True, operational tables are truncated first.
+    """
+    data_dir = Path(data_dir)
+    if not data_dir.exists():
+        raise FileNotFoundError(f"Data directory {data_dir} does not exist.")
+    if replace:
+        truncate_operational_tables(db)
+    _load_operational_csvs(db, data_dir)
+
+
+def _load_operational_csvs(db: Session, data_dir: Path) -> None:
+    print(f"Starting database seeding from {data_dir}...")
+
     try:
         # 1. Customers
-        customers_csv = DATA_OUTPUT_DIR / "customers.csv"
+        customers_csv = data_dir / "customers.csv"
         if customers_csv.exists():
             existing_custs = {c[0] for c in db.query(Customer.customer_id).all()}
             df_cust = pd.read_csv(customers_csv)
@@ -86,7 +105,7 @@ def seed_database():
             print(f"Customers: {len(new_custs)} inserted (Total: {len(existing_custs) + len(new_custs)})")
 
         # 2. Orders
-        orders_csv = DATA_OUTPUT_DIR / "orders.csv"
+        orders_csv = data_dir / "orders.csv"
         if orders_csv.exists():
             existing_orders = {o[0] for o in db.query(Order.order_id).all()}
             df_ord = pd.read_csv(orders_csv)
@@ -110,7 +129,7 @@ def seed_database():
             print(f"Orders: {len(new_orders)} inserted (Total: {len(existing_orders) + len(new_orders)})")
 
         # 3. Payments
-        payments_csv = DATA_OUTPUT_DIR / "payments.csv"
+        payments_csv = data_dir / "payments.csv"
         if payments_csv.exists():
             existing_payments = {p[0] for p in db.query(Payment.payment_id).all()}
             df_pay = pd.read_csv(payments_csv)
@@ -136,7 +155,7 @@ def seed_database():
             print(f"Payments: {len(new_payments)} inserted (Total: {len(existing_payments) + len(new_payments)})")
 
         # 4. Refunds
-        refunds_csv = DATA_OUTPUT_DIR / "refunds.csv"
+        refunds_csv = data_dir / "refunds.csv"
         if refunds_csv.exists():
             existing_refunds = {r[0] for r in db.query(Refund.refund_id).all()}
             df_ref = pd.read_csv(refunds_csv)
@@ -160,7 +179,7 @@ def seed_database():
             print(f"Refunds: {len(new_refunds)} inserted (Total: {len(existing_refunds) + len(new_refunds)})")
 
         # 5. Settlements
-        settlements_csv = DATA_OUTPUT_DIR / "settlements.csv"
+        settlements_csv = data_dir / "settlements.csv"
         if settlements_csv.exists():
             existing_settlements = {s[0] for s in db.query(Settlement.settlement_id).all()}
             df_set = pd.read_csv(settlements_csv)
@@ -187,7 +206,7 @@ def seed_database():
             print(f"Settlements: {len(new_settlements)} inserted (Total: {len(existing_settlements) + len(new_settlements)})")
 
         # 6. Bank Transactions
-        bank_csv = DATA_OUTPUT_DIR / "bank_transactions.csv"
+        bank_csv = data_dir / "bank_transactions.csv"
         if bank_csv.exists():
             existing_btxns = {b[0] for b in db.query(BankTransaction.bank_txn_id).all()}
             df_btx = pd.read_csv(bank_csv)
@@ -211,7 +230,7 @@ def seed_database():
             print(f"Bank Transactions: {len(new_btxns)} inserted (Total: {len(existing_btxns) + len(new_btxns)})")
 
         # 7. Invoices
-        invoices_csv = DATA_OUTPUT_DIR / "invoices.csv"
+        invoices_csv = data_dir / "invoices.csv"
         if invoices_csv.exists():
             existing_invoices = {i[0] for i in db.query(Invoice.invoice_id).all()}
             df_inv = pd.read_csv(invoices_csv)
@@ -238,7 +257,7 @@ def seed_database():
             print(f"Invoices: {len(new_invoices)} inserted (Total: {len(existing_invoices) + len(new_invoices)})")
 
         # 8. Tax Records
-        tax_csv = DATA_OUTPUT_DIR / "tax_records.csv"
+        tax_csv = data_dir / "tax_records.csv"
         if tax_csv.exists():
             existing_taxes = {t[0] for t in db.query(TaxRecord.tax_id).all()}
             df_tax = pd.read_csv(tax_csv)
@@ -263,12 +282,24 @@ def seed_database():
                 db.flush()
             print(f"Tax Records: {len(new_taxes)} inserted (Total: {len(existing_taxes) + len(new_taxes)})")
 
-        # Commit transaction
         db.commit()
         print("\nDatabase seeding completed successfully!")
 
-    except Exception as e:
+    except Exception:
         db.rollback()
+        raise
+
+
+def seed_database():
+    """Seeds the PostgreSQL development database with Phase 2 synthetic financial data."""
+    if not DATA_OUTPUT_DIR.exists():
+        print(f"ERROR: Data output directory {DATA_OUTPUT_DIR} does not exist.")
+        sys.exit(1)
+
+    db = SessionLocal()
+    try:
+        seed_from_directory(db, DATA_OUTPUT_DIR, replace=False)
+    except Exception as e:
         print(f"\nERROR during database seeding: {e}. Transaction rolled back.")
         sys.exit(1)
     finally:

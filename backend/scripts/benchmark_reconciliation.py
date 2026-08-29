@@ -1,6 +1,5 @@
 import sys
 from pathlib import Path
-import pandas as pd
 
 project_root = Path(__file__).resolve().parent.parent.parent
 backend_dir = project_root / "backend"
@@ -10,72 +9,57 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from app.core.database import SessionLocal
-from app.reconciliation.engine import reconcile_all_cases
+from app.evaluation.evaluator import evaluate_loaded_session
+from app.evaluation.constants import DEV_DATASET_DIR, TARGET_ACCURACY
 
-GROUND_TRUTH_CSV = project_root / "data" / "output" / "ground_truth.csv"
+
+GROUND_TRUTH_CSV = DEV_DATASET_DIR / "ground_truth.csv"
 
 
 def run_benchmark():
-    """Evaluates the Deterministic Reconciliation Engine against the external ground_truth.csv oracle."""
+    """Score the currently loaded development database (public schema) against data/output ground truth.
+
+    This is the Phase 4 convenience check. Multi-seed isolated evaluation lives in run_evaluation.py.
+    """
     print("FINCTRL AI Deterministic Reconciliation Engine Benchmark\n")
+    print("(Evaluates the development database. For multi-seed isolated benchmarks use run_evaluation.py.)\n")
 
     if not GROUND_TRUTH_CSV.exists():
         print(f"ERROR: Benchmark ground truth file {GROUND_TRUTH_CSV} not found.")
         sys.exit(1)
 
-    df_gt = pd.read_csv(GROUND_TRUTH_CSV)
-    gt_map = {r["case_id"]: r["ground_truth_status"] for _, r in df_gt.iterrows()}
-
     db = SessionLocal()
     try:
-        results = reconcile_all_cases(db)
-        total = len(results)
-
-        correct_reason = 0
-        breakdown = {}
-
-        for res in results:
-            expected_reason = gt_map.get(res.case_id)
-            actual_reason = res.reason_code.value
-
-            if expected_reason not in breakdown:
-                breakdown[expected_reason] = {"total": 0, "correct": 0, "mismatches": []}
-
-            breakdown[expected_reason]["total"] += 1
-
-            if actual_reason == expected_reason:
-                correct_reason += 1
-                breakdown[expected_reason]["correct"] += 1
-            else:
-                breakdown[expected_reason]["mismatches"].append(
-                    f"case={res.case_id}: expected={expected_reason}, got={actual_reason}"
-                )
-
-        reason_accuracy = (correct_reason / total) * 100.0 if total > 0 else 0.0
-
-        print(f"Total Operational Cases Evaluated: {total}")
-        print(f"Reason-Code Accuracy: {correct_reason}/{total} ({reason_accuracy:.2f}%)\n")
-
-        print(f"{'Ground Truth Anomaly':<25} | {'Total':<6} | {'Correct':<8} | {'Accuracy':<8}")
-        print("-" * 55)
-        for status, stats in breakdown.items():
-            acc = (stats["correct"] / stats["total"]) * 100.0 if stats["total"] > 0 else 0.0
-            print(f"{status:<25} | {stats['total']:<6} | {stats['correct']:<8} | {acc:.1f}%")
-
-        print("\n" + "=" * 60)
-        if reason_accuracy >= 90.0:
-            print(f"Benchmark Result: PASS ({reason_accuracy:.2f}% >= 90.0%)")
-        else:
-            print(f"Benchmark Result: FAIL ({reason_accuracy:.2f}% < 90.0%)")
-            for status, stats in breakdown.items():
-                if stats["mismatches"]:
-                    print(f"\nMismatches in {status}:")
-                    for m in stats["mismatches"]:
-                        print(f"  - {m}")
-        print("=" * 60 + "\n")
-
+        summary = evaluate_loaded_session(db, GROUND_TRUTH_CSV, seed=42, dataset_path=DEV_DATASET_DIR)
     finally:
         db.close()
+
+    print(f"Total Operational Cases Evaluated: {summary.total_cases}")
+    print(
+        f"Reason-Code Accuracy: {summary.correct_cases}/{summary.total_cases} "
+        f"({summary.accuracy * 100:.2f}%)\n"
+    )
+
+    print(f"{'Ground Truth Anomaly':<25} | {'Total':<6} | {'Correct':<8} | {'Accuracy':<8}")
+    print("-" * 55)
+    for cls in summary.per_class:
+        if cls.support == 0:
+            continue
+        acc = (cls.correct / cls.support) * 100.0 if cls.support else 0.0
+        print(f"{cls.anomaly_class:<25} | {cls.support:<6} | {cls.correct:<8} | {acc:.1f}%")
+
+    print("\n" + "=" * 60)
+    reason_accuracy = summary.accuracy * 100.0
+    if reason_accuracy >= TARGET_ACCURACY:
+        print(f"Benchmark Result: PASS ({reason_accuracy:.2f}% >= {TARGET_ACCURACY:.1f}%)")
+    else:
+        print(f"Benchmark Result: FAIL ({reason_accuracy:.2f}% < {TARGET_ACCURACY:.1f}%)")
+        for rec in summary.false_positives:
+            print(
+                f"  - case={rec.case_id}: expected={rec.expected_reason_code}, "
+                f"got={rec.predicted_reason_code}"
+            )
+    print("=" * 60 + "\n")
 
 
 if __name__ == "__main__":
