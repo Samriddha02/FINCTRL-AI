@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.health import router as health_router
 from app.api.reconciliation import router as reconciliation_router
+from app.api.investigations import router as investigations_router
 
 app = FastAPI(
     title="FINCTRL AI",
@@ -20,6 +21,7 @@ app.add_middleware(
 
 app.include_router(health_router)
 app.include_router(reconciliation_router)
+app.include_router(investigations_router)
 
 
 @app.get("/")

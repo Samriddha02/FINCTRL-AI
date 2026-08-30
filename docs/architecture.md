@@ -46,11 +46,12 @@ This document describes the high-level architecture for FINCTRL AI.
 |   Evaluation & Benchmark Layer     |
 |     (app.evaluation.evaluator)     |
 +------------------------------------+
-                  │
-                  ▼ [NOT IMPLEMENTED YET]
+                  |
+                  v 
 +------------------------------------+
-|     Future AI Investigation        |
-|    (Phase 6 Agent & Tool Layer)    |
+|     AI Investigation & Agent       |
+|    (app.agents.controller)         |
+|  Facts -> Evidence -> Explanation  |
 +------------------------------------+
 ```
 
@@ -65,10 +66,9 @@ This document describes the high-level architecture for FINCTRL AI.
 | Database Layer | PostgreSQL 18.6 / SQLAlchemy | Phase 3 | ✅ Initialized & Seeded (8 tables) |
 | Deterministic Engine | Rule-based Engine | Phase 4 | ✅ Initialized (100.0% Benchmark Accuracy) |
 | Evaluation Framework | Pytest / Benchmark Suite | Phase 5 | ✅ Initialized (Multi-seed evaluation, 100% accuracy) |
-| Agent & Tool Layer | LangChain / Custom Agents | Phase 6 | ⏳ Planned |
+| Agent & Tool Layer | Custom State Machine Agent | Phase 6 | ✅ Initialized (LLM/Mock providers, validator) |
 | Investigation Engine | Discrepancy Analyzer | Phase 7 | ⏳ Planned |
 | Human Review & Audit | Approval Workflows | Phase 8 | ⏳ Planned |
 | Finance Q&A | RAG / Agent Q&A | Phase 9 | ⏳ Planned |
 | Cash Forecasting | Predictive Engine | Phase 10 | ⏳ Planned |
 | Tax-Line Matching | Tax Engine | Phase 11 | ⏳ Planned |
-
