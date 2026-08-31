@@ -65,7 +65,7 @@ def validate_facts_and_safety(
         if not rec:
             continue
         # Collect any potential IDs present in the evidence dictionaries
-        for field in ["payment_id", "order_id", "refund_id", "settlement_id", "bank_transaction_id", "invoice_id", "tax_record_id"]:
+        for field in ["payment_id", "order_id", "refund_id", "settlement_id", "bank_transaction_id", "invoice_id", "tax_id"]:
             if field in rec and rec[field]:
                 valid_ids.add(str(rec[field]).lower())
 

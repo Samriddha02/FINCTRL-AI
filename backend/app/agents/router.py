@@ -135,15 +135,21 @@ def build_investigation_context(
             return {"case_id": case_id}
         return {}
 
+    failed_required_tools = []
+    
     # Run required and optional tools
     for tool_name in strategy["required_tools"] + strategy["optional_tools"]:
         if tool_name not in TOOLS:
             logger.warning(f"Strategy references unknown tool: {tool_name}")
+            if tool_name in strategy["required_tools"]:
+                failed_required_tools.append(tool_name)
             continue
             
         args = get_tool_args(tool_name)
         # Skip executing if arguments are missing (e.g. payment_id not resolved)
         if not any(args.values()):
+            if tool_name in strategy["required_tools"]:
+                failed_required_tools.append(f"{tool_name} (missing args)")
             continue
             
         tool = TOOLS[tool_name]
@@ -154,6 +160,10 @@ def build_investigation_context(
                     evidence_records.append({"source_tool": tool_name, "record": item})
             else:
                 evidence_records.append({"source_tool": tool_name, "record": resp["data"]})
+        else:
+            if tool_name in strategy["required_tools"]:
+                error_msg = resp.get("error", "unknown error")
+                failed_required_tools.append(f"{tool_name} failed: {error_msg}")
 
     # Prepare evidence summary for LLM context
     serialized_evidence = []
@@ -180,7 +190,8 @@ def build_investigation_context(
         ],
         "evidence_records": evidence_records,
         "evidence_context_lines": serialized_evidence,
-        "investigation_steps": strategy["steps"]
+        "investigation_steps": strategy["steps"],
+        "failed_required_tools": failed_required_tools
     }
 
     return context

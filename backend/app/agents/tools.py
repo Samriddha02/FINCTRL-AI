@@ -7,6 +7,7 @@ from app.reconciliation.engine import reconcile_case
 
 # Input Validation Regex patterns to ensure safety
 # Matches valid IDs like PAY-00001, ORD-00001, SET-00001, INV-00001, TAX-00001, BT-00001, CASE-00001
+FINCTRL_ID_PATTERN = re.compile(r"^(CUST|ORD|PAY|REF|SETTL|BTXN|INV|TAX|CASE)-\d+$")
 SAFE_ID_PATTERN = re.compile(r"^[a-zA-Z0-9_\-]+$")
 
 def validate_id(id_val: str) -> None:
@@ -14,15 +15,24 @@ def validate_id(id_val: str) -> None:
     if not id_val or not isinstance(id_val, str):
         raise ValueError("Invalid tool argument: ID must be a non-empty string.")
     
+    # Reject path traversal early
+    if ".." in id_val or "/" in id_val or "\\" in id_val:
+        raise ValueError(f"Security Alert: SQL or path injection pattern detected in argument: '{id_val}'")
+        
+    # If it perfectly matches our known business ID formats, it is safe
+    if FINCTRL_ID_PATTERN.match(id_val):
+        return
+        
     # Reject path traversal and SQL injection attempts
     if not SAFE_ID_PATTERN.match(id_val):
         raise ValueError(f"Security Alert: Unsafe characters detected in argument: '{id_val}'")
     
     # Reject typical SQL injection terms or file path traversal
     lower_val = id_val.lower()
-    unsafe_keywords = ["select", "union", "insert", "drop", "delete", "update", "where", "or", "and", "..", "/", "\\"]
-    if any(kw in lower_val for kw in unsafe_keywords):
-        raise ValueError(f"Security Alert: SQL or path injection pattern detected in argument: '{id_val}'")
+    unsafe_keywords = [r"\bselect\b", r"\bunion\b", r"\binsert\b", r"\bdrop\b", r"\bdelete\b", r"\bupdate\b", r"\bwhere\b", r"\bor\b", r"\band\b"]
+    for kw in unsafe_keywords:
+        if re.search(kw, lower_val):
+            raise ValueError(f"Security Alert: SQL or path injection pattern detected in argument: '{id_val}'")
 
 
 class AgentTool:
@@ -82,7 +92,7 @@ def _payment_to_dict(payment) -> Optional[Dict[str, Any]]:
         "customer_id": payment.customer_id,
         "amount": float(payment.amount),
         "currency": payment.currency,
-        "status": payment.status,
+        "status": payment.payment_status,
         "created_at": payment.created_at.isoformat() if payment.created_at else None
     }
 
@@ -91,8 +101,8 @@ def _order_to_dict(order) -> Optional[Dict[str, Any]]:
     return {
         "order_id": order.order_id,
         "customer_id": order.customer_id,
-        "amount": float(order.amount),
-        "status": order.status,
+        "amount": float(order.order_amount),
+        "status": order.order_status,
         "created_at": order.created_at.isoformat() if order.created_at else None
     }
 
@@ -100,8 +110,8 @@ def _refund_to_dict(refund) -> Dict[str, Any]:
     return {
         "refund_id": refund.refund_id,
         "payment_id": refund.payment_id,
-        "amount": float(refund.amount),
-        "status": refund.status,
+        "amount": float(refund.refund_amount),
+        "status": refund.refund_status,
         "created_at": refund.created_at.isoformat() if refund.created_at else None
     }
 
@@ -114,17 +124,17 @@ def _settlement_to_dict(settlement) -> Optional[Dict[str, Any]]:
         "fee_amount": float(settlement.fee_amount),
         "tax_amount": float(settlement.tax_amount),
         "net_amount": float(settlement.net_amount),
-        "status": settlement.status,
-        "processed_at": settlement.processed_at.isoformat() if settlement.processed_at else None
+        "status": settlement.settlement_status,
+        "processed_at": settlement.settlement_date.isoformat() if settlement.settlement_date else None
     }
 
 def _bank_txn_to_dict(txn) -> Dict[str, Any]:
     return {
-        "bank_transaction_id": txn.bank_transaction_id,
+        "bank_transaction_id": txn.bank_txn_id,
         "reference_id": txn.reference_id,
         "amount": float(txn.amount),
-        "currency": txn.currency,
-        "posting_date": txn.posting_date.isoformat() if txn.posting_date else None,
+        "currency": "INR",  # assuming standard or adding back if it existed
+        "posting_date": txn.transaction_date.isoformat() if txn.transaction_date else None,
         "description": txn.description
     }
 
@@ -133,21 +143,23 @@ def _invoice_to_dict(invoice) -> Optional[Dict[str, Any]]:
     return {
         "invoice_id": invoice.invoice_id,
         "order_id": invoice.order_id,
-        "amount": float(invoice.amount),
+        "amount": float(invoice.total_amount),
         "tax_amount": float(invoice.tax_amount),
-        "status": invoice.status,
-        "issued_at": invoice.issued_at.isoformat() if invoice.issued_at else None
+        "status": invoice.invoice_status,
+        "issued_at": invoice.invoice_date.isoformat() if invoice.invoice_date else None
     }
 
 def _tax_record_to_dict(tax) -> Optional[Dict[str, Any]]:
     if not tax: return None
     return {
-        "tax_record_id": tax.tax_record_id,
+        "tax_id": tax.tax_id,
         "invoice_id": tax.invoice_id,
+        "tax_type": tax.tax_type,
         "taxable_amount": float(tax.taxable_amount),
         "tax_rate": float(tax.tax_rate),
         "tax_amount": float(tax.tax_amount),
-        "status": tax.status
+        "filing_period": tax.filing_period,
+        "recorded_at": tax.recorded_at.isoformat() if tax.recorded_at else None
     }
 
 

@@ -131,6 +131,20 @@ class AgentInvestigationController:
             self._save_result(result)
             return result
 
+        if context.get("failed_required_tools"):
+            self._transition_to("ESCALATE")
+            failed_tools_str = ", ".join(context["failed_required_tools"])
+            warning_msg = f"Required evidence collection failed for tools: {failed_tools_str}"
+            result = self._build_escalation_result(
+                case_id, recon_result,
+                "Failed to retrieve required operational evidence.",
+                [warning_msg]
+            )
+            # Override root cause to ensure we don't claim an evidence-backed analysis
+            result.root_cause = "Investigation aborted due to missing required evidence."
+            self._save_result(result)
+            return result
+
         # 4. Analyze via LLM provider
         self._transition_to("ANALYZE")
         
@@ -198,6 +212,7 @@ class AgentInvestigationController:
         result_obj.deterministic_status = recon_result.status.value
         result_obj.deterministic_reason_code = recon_result.reason_code.value
         result_obj.analysis_source = AnalysisSource.LLM
+        result_obj.evidence = context.get("evidence_records", [])
         
         # Append trace information
         result_obj.investigation_steps = self.state_history.copy()
