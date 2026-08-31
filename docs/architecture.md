@@ -67,8 +67,8 @@ This document describes the high-level architecture for FINCTRL AI.
 | Deterministic Engine | Rule-based Engine | Phase 4 | ✅ Initialized (100.0% Benchmark Accuracy) |
 | Evaluation Framework | Pytest / Benchmark Suite | Phase 5 | ✅ Initialized (Multi-seed evaluation, 100% accuracy) |
 | Agent & Tool Layer | Custom State Machine Agent | Phase 6 | ✅ Initialized (LLM/Mock providers, validator) |
-| Investigation Engine | Discrepancy Analyzer | Phase 7 | ⏳ Planned |
-| Human Review & Audit | Approval Workflows | Phase 8 | ⏳ Planned |
-| Finance Q&A | RAG / Agent Q&A | Phase 9 | ⏳ Planned |
-| Cash Forecasting | Predictive Engine | Phase 10 | ⏳ Planned |
-| Tax-Line Matching | Tax Engine | Phase 11 | ⏳ Planned |
+| Investigation Engine | Discrepancy Analyzer | Phase 7 | Done (Integrated in Phase 6/8) |
+| Human Review & Audit | Approval Workflows & Immutable Audit | Phase 8 | Done (`/api/reviews`, `/api/audit`, policy & verification) |
+| Finance Q&A | RAG / Agent Q&A | Phase 9 | Planned |
+| Cash Forecasting | Predictive Engine | Phase 10 | Planned |
+| Tax-Line Matching | Tax Engine | Phase 11 | Planned |

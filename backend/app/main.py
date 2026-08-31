@@ -3,11 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.health import router as health_router
 from app.api.reconciliation import router as reconciliation_router
 from app.api.investigations import router as investigations_router
+from app.api.reviews import router as reviews_router
+from app.api.audit import router as audit_router
 
 app = FastAPI(
     title="FINCTRL AI",
     description="The AI Finance Controller that investigates the books, not just reconciles them.",
-    version="0.5.0",
+    version="0.8.0",
 )
 
 # Enable CORS for frontend integration
@@ -22,6 +24,8 @@ app.add_middleware(
 app.include_router(health_router)
 app.include_router(reconciliation_router)
 app.include_router(investigations_router)
+app.include_router(reviews_router)
+app.include_router(audit_router)
 
 
 @app.get("/")
@@ -32,4 +36,7 @@ def read_root():
         "health": "/health",
         "health_db": "/health/db",
         "reconciliation": "/api/reconciliation",
+        "investigations": "/api/investigations/{case_id}",
+        "human_review": "/api/reviews",
+        "audit": "/api/audit",
     }

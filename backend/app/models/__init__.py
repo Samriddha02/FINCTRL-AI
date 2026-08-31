@@ -7,6 +7,9 @@ from app.models.settlement import Settlement
 from app.models.bank_transaction import BankTransaction
 from app.models.invoice import Invoice
 from app.models.tax_record import TaxRecord
+from app.models.human_review import HumanReview
+from app.models.audit_event import AuditEvent
+from app.models.agent_run import AgentRun, SystemMetric
 
 __all__ = [
     "Base",
@@ -18,4 +21,8 @@ __all__ = [
     "BankTransaction",
     "Invoice",
     "TaxRecord",
+    "HumanReview",
+    "AuditEvent",
+    "AgentRun",
+    "SystemMetric",
 ]
