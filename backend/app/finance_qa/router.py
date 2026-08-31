@@ -124,11 +124,13 @@ def route_finance_question(question: str) -> RouteResult:
                 unsupported_message=f"Security Alert: Invalid identifier format detected in question."
             )
 
-    # 3. Check for Aggregation queries
-    is_aggregation = any(re.search(kw, lower_q) for kw in AGGREGATION_KEYWORDS)
+    # 3. Check for Aggregation & Forecast queries
+    is_aggregation = any(re.search(kw, lower_q) for kw in AGGREGATION_KEYWORDS) or "forecast" in lower_q
     if is_aggregation:
         agg_target = "payments"
-        if "settlement" in lower_q:
+        if "forecast" in lower_q or "cash inflow" in lower_q or "cash outflow" in lower_q or "net cash" in lower_q:
+            agg_target = "cash_forecast"
+        elif "settlement" in lower_q:
             agg_target = "settlements"
         elif "investigation" in lower_q or "case" in lower_q:
             agg_target = "cases_needing_investigation"

@@ -313,6 +313,24 @@ def _handle_aggregation_query(db: Session, route: RouteResult) -> RetrievalResul
             source_facts=["cases_needing_investigation_count"]
         ))
 
+    elif target == "cash_forecast":
+        from app.forecasting.controller import CashForecastController
+        fc_res = CashForecastController(db).generate_forecast(horizon_days=7)
+        
+        facts.append(QAFactRecord(key="forecast_horizon_days", value=fc_res.horizon_days, source="Cash Forecasting Engine", entity_type="forecast"))
+        facts.append(QAFactRecord(key="forecast_inflow", value=fc_res.forecast.inflow, source="Cash Forecasting Engine", entity_type="forecast"))
+        facts.append(QAFactRecord(key="forecast_outflow", value=fc_res.forecast.outflow, source="Cash Forecasting Engine", entity_type="forecast"))
+        facts.append(QAFactRecord(key="forecast_net", value=fc_res.forecast.net, source="Cash Forecasting Engine", entity_type="forecast"))
+        facts.append(QAFactRecord(key="forecast_confidence", value=fc_res.confidence, source="Cash Forecasting Engine", entity_type="forecast"))
+        citations.append(f"Cash Forecast {fc_res.forecast_id}")
+
+        calculations.append(QACalculation(
+            calculation_name="expected_net_cash",
+            formula="forecast.inflow - forecast.outflow",
+            value=fc_res.forecast.net,
+            source_facts=["forecast_inflow", "forecast_outflow"]
+        ))
+
     return RetrievalResult(
         facts=facts,
         calculations=calculations,
