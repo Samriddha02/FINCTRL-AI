@@ -5,11 +5,12 @@ from app.api.reconciliation import router as reconciliation_router
 from app.api.investigations import router as investigations_router
 from app.api.reviews import router as reviews_router
 from app.api.audit import router as audit_router
+from app.api.finance_qa import router as finance_qa_router
 
 app = FastAPI(
     title="FINCTRL AI",
     description="The AI Finance Controller that investigates the books, not just reconciles them.",
-    version="0.8.0",
+    version="0.9.0",
 )
 
 # Enable CORS for frontend integration
@@ -26,6 +27,7 @@ app.include_router(reconciliation_router)
 app.include_router(investigations_router)
 app.include_router(reviews_router)
 app.include_router(audit_router)
+app.include_router(finance_qa_router)
 
 
 @app.get("/")
@@ -39,4 +41,5 @@ def read_root():
         "investigations": "/api/investigations/{case_id}",
         "human_review": "/api/reviews",
         "audit": "/api/audit",
+        "finance_qa": "/api/finance/qa"
     }

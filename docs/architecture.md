@@ -69,6 +69,6 @@ This document describes the high-level architecture for FINCTRL AI.
 | Agent & Tool Layer | Custom State Machine Agent | Phase 6 | ✅ Initialized (LLM/Mock providers, validator) |
 | Investigation Engine | Discrepancy Analyzer | Phase 7 | Done (Integrated in Phase 6/8) |
 | Human Review & Audit | Approval Workflows & Immutable Audit | Phase 8 | Done (`/api/reviews`, `/api/audit`, policy & verification) |
-| Finance Q&A | RAG / Agent Q&A | Phase 9 | Planned |
+| Finance Q&A | RAG / Grounded Finance Assistant | Phase 9 | Done (`/api/finance/qa`, fact-first & validation) |
 | Cash Forecasting | Predictive Engine | Phase 10 | Planned |
 | Tax-Line Matching | Tax Engine | Phase 11 | Planned |
