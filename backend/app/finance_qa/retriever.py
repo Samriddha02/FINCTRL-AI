@@ -170,9 +170,8 @@ def retrieve_qa_data_and_calculate(db: Session, route: RouteResult) -> Retrieval
             facts.append(QAFactRecord(key="invoice_tax", value=inv_data["tax_amount"], source=f"Invoice {inv_id}", entity_type="invoice", entity_id=inv_id))
             facts.append(QAFactRecord(key="invoice_status", value=inv_data["status"], source=f"Invoice {inv_id}", entity_type="invoice", entity_id=inv_id))
 
-    # 7. Retrieve Tax Record details
+    # 7. Retrieve Tax Record & Tax Matching details
     tax_ids = extracted.get("TAX", [])
-    # Also attempt using invoice_id if tax record ID not explicitly supplied
     search_invoice_ids = invoice_ids.copy()
     if "invoice" in raw_data:
         search_invoice_ids.append(raw_data["invoice"]["invoice_id"])
@@ -189,6 +188,16 @@ def retrieve_qa_data_and_calculate(db: Session, route: RouteResult) -> Retrieval
             facts.append(QAFactRecord(key="tax_record_tax", value=tax_data["tax_amount"], source=f"TaxRecord {tax_data['tax_id']}", entity_type="tax_record", entity_id=tax_data["tax_id"]))
             facts.append(QAFactRecord(key="taxable_amount", value=tax_data["taxable_amount"], source=f"TaxRecord {tax_data['tax_id']}", entity_type="tax_record", entity_id=tax_data["tax_id"]))
             facts.append(QAFactRecord(key="tax_rate", value=tax_data["tax_rate"], source=f"TaxRecord {tax_data['tax_id']}", entity_type="tax_record", entity_id=tax_data["tax_id"]))
+
+        # Also delegate to Phase 11 Tax Matching Engine
+        try:
+            from app.tax_matching.controller import TaxMatchController
+            tm_res = TaxMatchController(db).process_tax_match(inv_id)
+            facts.append(QAFactRecord(key="tax_match_status", value=tm_res.status.value, source="Tax Line Matcher Engine", entity_type="tax_matching", entity_id=inv_id))
+            facts.append(QAFactRecord(key="tax_match_difference", value=tm_res.difference, source="Tax Line Matcher Engine", entity_type="tax_matching", entity_id=inv_id))
+            citations.append(f"TaxMatch {tm_res.match_id}")
+        except Exception:
+            pass
 
     # 8. Retrieve Reconciliation Result
     case_ids = extracted.get("CASE", [])

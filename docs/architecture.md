@@ -71,4 +71,4 @@ This document describes the high-level architecture for FINCTRL AI.
 | Human Review & Audit | Approval Workflows & Immutable Audit | Phase 8 | Done (`/api/reviews`, `/api/audit`, policy & verification) |
 | Finance Q&A | RAG / Grounded Finance Assistant | Phase 9 | Done (`/api/finance/qa`, fact-first & validation) |
 | Cash Forecasting | Deterministic Cash Forecasting Engine | Phase 10 | Done (`/api/forecast/cash`, uncertainty & risk-aware) |
-| Tax-Line Matching | Tax Engine | Phase 11 | Planned |
+| Tax-Line Matching | Deterministic Tax Control Engine | Phase 11 | Done (`/api/tax-matching`, precedence-based rules & evidence) |
