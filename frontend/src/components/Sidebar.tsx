@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, FileSearch, AlertCircle, UserCheck, MessageSquare, TrendingUp, Receipt, ShieldCheck } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { getReviews } from '../services/api';
 
 export default function Sidebar() {
   const navItems = [
@@ -14,11 +16,18 @@ export default function Sidebar() {
     { name: 'Audit Trail', path: '/audit-trail', icon: <ShieldCheck size={20} /> },
   ];
 
+  // Fetch reviews to compute pending count (PENDING + ESCALATED)
+  const { data: reviews = [] } = useQuery({ queryKey: ['reviews'], queryFn: getReviews });
+  const pendingCount = reviews.filter((r: any) => r.status === 'PENDING' || r.status === 'ESCALATED').length;
+
   return (
     <aside className="w-sidebar-width bg-primary-container text-white flex flex-col hidden md:flex">
-      <div className="p-6 flex items-center gap-3 border-b border-white/10">
-        <div className="w-8 h-8 rounded bg-brand-blue flex items-center justify-center font-bold">F</div>
-        <span className="font-semibold text-lg tracking-wide">FINCTRL-AI</span>
+      <div className="px-2 py-4 flex items-center justify-center w-full border-b border-white/10">
+        <img
+          src="/assets/finctrl-ai-logo-high-quality.svg"
+          alt="FINCTRL-AI"
+          className="w-[220px] h-auto object-contain"
+        />
       </div>
       <nav className="flex-1 py-6 px-4 space-y-1">
         {navItems.map((item) => (
@@ -33,6 +42,11 @@ export default function Sidebar() {
           >
             {item.icon}
             <span className="font-medium text-sm">{item.name}</span>
+            {item.name === 'Human Review' && pendingCount > 0 && (
+              <span className="ml-auto inline-flex items-center justify-center h-5 min-w-[1.25rem] px-1 text-xs font-medium bg-warning/20 text-warning rounded-full">
+                {pendingCount}
+              </span>
+            )}
           </NavLink>
         ))}
       </nav>

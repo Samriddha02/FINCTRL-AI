@@ -8,7 +8,7 @@ export default function CaseInvestigation() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data: invData, isLoading, isError } = useQuery({
+  const { data: invData, isLoading } = useQuery({
     queryKey: ['investigation', caseId],
     queryFn: () => getInvestigation(caseId as string),
     retry: false

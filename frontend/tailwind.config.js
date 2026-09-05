@@ -71,9 +71,9 @@ export default {
               "brand-blue": "#2563EB"
           },
           "borderRadius": {
-              "DEFAULT": "0.125rem",
-              "lg": "0.25rem",
-              "xl": "0.5rem",
+              "DEFAULT": "0.5rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
               "full": "0.75rem"
           },
           "spacing": {
