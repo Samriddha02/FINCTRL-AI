@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finance Control Center - Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-primary-container": "#7e8da9",
+                "surface-variant": "#e0e3e5",
+                "on-tertiary-fixed-variant": "#00504d",
+                "surface-container-lowest": "#ffffff",
+                "text-primary": "#17202A",
+                "surface": "#FFFFFF",
+                "primary-container": "#16263d",
+                "surface-dim": "#d8dadc",
+                "on-secondary-fixed-variant": "#003ea8",
+                "on-primary": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "success": "#10B981",
+                "navy-dark": "#0F1B2D",
+                "surface-container-highest": "#e0e3e5",
+                "tertiary": "#001413",
+                "on-error": "#ffffff",
+                "on-surface": "#191c1e",
+                "on-surface-variant": "#44474d",
+                "warning": "#F59E0B",
+                "inverse-on-surface": "#eff1f3",
+                "surface-secondary": "#F1F4F7",
+                "background": "#F6F8FA",
+                "text-secondary": "#5E6875",
+                "surface-container-low": "#f2f4f6",
+                "teal-dark": "#0E7F7B",
+                "on-secondary-container": "#fefcff",
+                "secondary-fixed-dim": "#b4c5ff",
+                "action-blue-light": "#EFF6FF",
+                "inverse-primary": "#b7c7e5",
+                "primary-fixed": "#d5e3ff",
+                "on-primary-fixed": "#0b1c32",
+                "critical": "#EF4444",
+                "on-background": "#191c1e",
+                "on-tertiary-container": "#009d98",
+                "error": "#ba1a1a",
+                "secondary-fixed": "#dbe1ff",
+                "surface-container-high": "#e6e8ea",
+                "primary-fixed-dim": "#b7c7e5",
+                "inverse-surface": "#2d3133",
+                "on-secondary": "#ffffff",
+                "action-blue-dark": "#2563EB",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed": "#00174b",
+                "on-primary-fixed-variant": "#384760",
+                "info": "#3B82F6",
+                "primary": "#011127",
+                "border-base": "#D9E0E7",
+                "surface-container": "#eceef0",
+                "surface-tint": "#505f79",
+                "tertiary-container": "#002b29",
+                "surface-bright": "#f8f9fb",
+                "outline-variant": "#c5c6ce",
+                "secondary-container": "#316bf3",
+                "tertiary-fixed-dim": "#60d9d3",
+                "secondary": "#0051d5",
+                "tertiary-fixed": "#7ef5ef",
+                "outline": "#75777e",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed": "#00201f",
+                "text-muted": "#87919D"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "compact-padding": "12px",
+                "sidebar-width": "240px",
+                "component-gap": "24px",
+                "base": "8px",
+                "page-padding": "32px",
+                "gutter": "16px",
+                "xs": "4px",
+                "sm": "8px",
+                "md": "16px",
+                "lg": "24px",
+                "xl": "32px",
+                "margin-page": "32px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "label-xs": [
+                        "Inter"
+                ],
+                "tabular-numeric": [
+                        "Inter"
+                ],
+                "title-sm": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-xs": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "tabular-numeric": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "title-sm": [
+                        "18px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            background-color: #F6F8FA; 
+            color: #17202A;
+        }
+
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .level-1-card {
+            background-color: #FFFFFF;
+            border: 1px solid #D9E0E7;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .kpi-row-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .kpi-row-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .kpi-row-scroll::-webkit-scrollbar-thumb {
+            background: #D9E0E7;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body class="bg-background font-body-md text-text-primary antialiased overflow-x-hidden min-h-screen">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[240px] bg-primary-container flex flex-col py-lg px-md gap-sm z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-display-lg text-display-lg font-bold text-white">FinControl AI</h1>
+<p class="font-label-xs text-label-xs text-gray-400 uppercase mt-1 tracking-wider">Enterprise Core</p>
+</div>
+<div class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm bg-action-blue-dark text-white rounded-xl transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-xs text-label-xs font-semibold">Overview</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-xs text-label-xs font-semibold">Reconciliation</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">troubleshoot</span>
+<span class="font-label-xs text-label-xs font-semibold">Investigations</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-label-xs text-label-xs font-semibold">Human Review</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-xs text-label-xs font-semibold">Finance Q&amp;A</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-xs text-label-xs font-semibold">Cash Forecast</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-label-xs text-label-xs font-semibold">Tax Matching</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-xs text-label-xs font-semibold">Audit Trail</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">file_download</span>
+<span class="font-label-xs text-label-xs font-semibold">System Health</span>
+</a>
+</div>
+<div class="mt-auto border-t border-white/10 pt-md">
+<a class="flex items-center gap-md px-md py-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">api</span>
+<span class="font-label-xs text-label-xs font-semibold">API Status</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full h-16 px-gutter ml-[240px] max-w-[calc(100%-240px)] bg-surface border-b border-border-base">
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-[20px]">search</span>
+<input class="bg-surface-secondary border border-border-base text-text-primary text-sm rounded-lg focus:ring-action-blue-dark focus:border-action-blue-dark block w-96 pl-10 p-2 placeholder-text-secondary" placeholder="Search investigations, cases, payments..." type="text"/>
+</div>
+</div>
+<div class="font-title-sm text-title-sm font-semibold text-text-primary absolute left-1/2 -translate-x-1/2">
+            Finance Control Center
+        </div>
+<div class="flex items-center gap-sm">
+<button class="p-2 text-text-secondary hover:text-action-blue-dark transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-critical rounded-full"></span>
+</button>
+<button class="p-2 text-text-secondary hover:text-action-blue-dark transition-colors">
+<span class="material-symbols-outlined">switch_account</span>
+</button>
+<button class="p-2 text-text-secondary hover:text-action-blue-dark transition-colors flex items-center gap-2 border-l border-border-base pl-4 ml-2">
+<span class="material-symbols-outlined text-[28px]">account_circle</span>
+<div class="text-left hidden lg:block">
+<p class="font-label-xs text-label-xs font-bold leading-tight text-text-primary">Admin User</p>
+<p class="font-label-xs text-[10px] text-text-secondary leading-tight">Controller</p>
+</div>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] p-margin-page min-h-[calc(100vh-64px)] bg-background">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary mb-1">Control Overview</h2>
+<p class="font-body-md text-body-md text-text-secondary">Real-time system health and reconciliation status.</p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-action-blue-dark text-white px-4 py-2 rounded-lg font-tabular-numeric text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">sync</span> Force Sync
+                </button>
+</div>
+</div>
+<!-- 1. KPI Row -->
+<div class="flex overflow-x-auto gap-md mb-xl pb-2 kpi-row-scroll">
+<div class="level-1-card p-lg min-w-[240px] flex-shrink-0 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider">Total Payments</span>
+<span class="material-symbols-outlined text-action-blue-dark text-[20px]">payments</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-text-primary mb-1">100</div>
+<div class="font-label-xs text-label-xs text-text-secondary">₹68.36L processed</div>
+</div>
+</div>
+<div class="level-1-card p-lg min-w-[240px] flex-shrink-0 flex flex-col justify-between border-l-4 border-l-success">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider">Reconciliation</span>
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-text-primary mb-1">100</div>
+<div class="font-label-xs text-label-xs text-text-secondary">53 matched, 47 attn</div>
+</div>
+</div>
+<div class="level-1-card p-lg min-w-[240px] flex-shrink-0 flex flex-col justify-between border-l-4 border-l-warning">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider">Investigation Queue</span>
+<span class="material-symbols-outlined text-warning text-[20px]">troubleshoot</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-text-primary mb-1">47</div>
+<div class="font-label-xs text-label-xs text-warning">Requires investigation</div>
+</div>
+</div>
+<div class="level-1-card p-lg min-w-[240px] flex-shrink-0 flex flex-col justify-between border-l-4 border-l-critical">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider">Human Review</span>
+<span class="material-symbols-outlined text-critical text-[20px]">assignment_late</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-text-primary mb-1">47</div>
+<div class="font-label-xs text-label-xs text-critical">Pending controller review</div>
+</div>
+</div>
+<div class="level-1-card p-lg min-w-[240px] flex-shrink-0 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider">Cash Forecast</span>
+<span class="material-symbols-outlined text-action-blue-dark text-[20px]">trending_up</span>
+</div>
+<div>
+<div class="font-display-lg text-[28px] font-bold text-text-primary mb-1 tracking-tight">₹2.04L</div>
+<div class="font-label-xs text-label-xs text-text-secondary">7-day projected net</div>
+</div>
+</div>
+<div class="level-1-card p-lg min-w-[240px] flex-shrink-0 flex flex-col justify-between border-l-4 border-l-warning">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider">Tax Mismatches</span>
+<span class="material-symbols-outlined text-warning text-[20px]">warning</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-text-primary mb-1">5</div>
+<div class="font-label-xs text-label-xs text-text-secondary">95 exact matches</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- 2. Left Column (Main) -->
+<div class="col-span-12 xl:col-span-8 flex flex-col gap-lg">
+<!-- Reconciliation Overview Card -->
+<div class="level-1-card p-lg">
+<h3 class="font-title-sm text-title-sm text-text-primary mb-md">Reconciliation Status Overview</h3>
+<div class="flex items-center gap-xl">
+<!-- Pseudo Donut Chart -->
+<div class="relative w-40 h-40 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<!-- Background Circle -->
+<path class="text-surface-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Exact Match (53%) -->
+<path class="text-success" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="53, 100" stroke-width="3"></path>
+<!-- Requires Investigation (47%) -->
+<path class="text-warning" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="47, 100" stroke-dashoffset="-53" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-[24px] font-bold text-text-primary leading-none">100</span>
+<span class="font-label-xs text-[10px] text-text-secondary uppercase mt-1">Cases</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-4">
+<p class="font-body-md text-body-md text-text-secondary mb-1">100 cases evaluated</p>
+<p class="font-body-md text-sm text-success flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">verified</span> 100% deterministic reconciliation coverage</p>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-success"></div>
+<span class="font-tabular-numeric text-sm text-text-primary">Exact Match</span>
+</div>
+<span class="font-tabular-numeric text-sm font-semibold text-text-primary">53</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-warning"></div>
+<span class="font-tabular-numeric text-sm text-text-primary">Requires Investigation</span>
+</div>
+<span class="font-tabular-numeric text-sm font-semibold text-warning">47</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-critical"></div>
+<span class="font-tabular-numeric text-sm text-text-primary">Escalated</span>
+</div>
+<span class="font-tabular-numeric text-sm font-semibold text-text-primary">0</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Reconciliation Cases Table -->
+<div class="level-1-card overflow-hidden">
+<div class="p-4 border-b border-border-base flex justify-between items-center bg-surface-bright">
+<h3 class="font-title-sm text-title-sm text-text-primary">Recent Reconciliation Cases</h3>
+<button class="font-label-xs text-label-xs text-action-blue-dark hover:underline">View All Cases</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse bg-surface">
+<thead>
+<tr class="bg-surface-bright border-b border-border-base">
+<th class="p-3 font-label-xs text-[10px] text-text-secondary uppercase tracking-wider font-semibold sticky top-0">Case ID</th>
+<th class="p-3 font-label-xs text-[10px] text-text-secondary uppercase tracking-wider font-semibold sticky top-0">Status</th>
+<th class="p-3 font-label-xs text-[10px] text-text-secondary uppercase tracking-wider font-semibold sticky top-0">Reason</th>
+<th class="p-3 font-label-xs text-[10px] text-text-secondary uppercase tracking-wider font-semibold sticky top-0 text-right">Difference</th>
+<th class="p-3 font-label-xs text-[10px] text-text-secondary uppercase tracking-wider font-semibold sticky top-0 text-right">AI Confidence</th>
+<th class="p-3 font-label-xs text-[10px] text-text-secondary uppercase tracking-wider font-semibold sticky top-0 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-tabular-numeric text-sm">
+<tr class="border-b border-border-base hover:bg-surface-secondary transition-colors group">
+<td class="p-3 text-action-blue-dark font-medium">CASE-00001</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-warning/15 text-warning">Mismatch</span>
+</td>
+<td class="p-3 text-text-primary">TAX_MISMATCH</td>
+<td class="p-3 text-right text-warning">₹6,101.72</td>
+<td class="p-3 text-right text-text-primary">90%</td>
+<td class="p-3 text-right">
+<button class="px-3 py-1 bg-transparent border border-border-base text-text-primary rounded hover:bg-surface-secondary transition-colors text-xs font-medium">Investigate</button>
+</td>
+</tr>
+<tr class="border-b border-border-base hover:bg-surface-secondary transition-colors group">
+<td class="p-3 text-action-blue-dark font-medium">CASE-00002</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-success/15 text-success">Exact Match</span>
+</td>
+<td class="p-3 text-text-primary">EXACT_MATCH</td>
+<td class="p-3 text-right text-text-secondary">₹0.00</td>
+<td class="p-3 text-right text-success">99%</td>
+<td class="p-3 text-right">
+<button class="px-3 py-1 text-text-secondary hover:text-text-primary transition-colors text-xs font-medium">View</button>
+</td>
+</tr>
+<tr class="border-b border-border-base hover:bg-surface-secondary transition-colors group">
+<td class="p-3 text-action-blue-dark font-medium">CASE-00003</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-warning/15 text-warning">Mismatch</span>
+</td>
+<td class="p-3 text-text-primary">AMOUNT_MISMATCH</td>
+<td class="p-3 text-right text-warning">₹450.00</td>
+<td class="p-3 text-right text-text-primary">85%</td>
+<td class="p-3 text-right">
+<button class="px-3 py-1 bg-transparent border border-border-base text-text-primary rounded hover:bg-surface-secondary transition-colors text-xs font-medium">Investigate</button>
+</td>
+</tr>
+<tr class="border-b border-border-base hover:bg-surface-secondary transition-colors group">
+<td class="p-3 text-action-blue-dark font-medium">CASE-00004</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-critical/15 text-critical">Review Req</span>
+</td>
+<td class="p-3 text-text-primary">DUPLICATE_PAYMENT</td>
+<td class="p-3 text-right text-critical">₹12,400.00</td>
+<td class="p-3 text-right text-critical">72%</td>
+<td class="p-3 text-right">
+<button class="px-3 py-1 bg-action-blue-dark text-white rounded hover:bg-blue-700 transition-colors text-xs font-medium">Review</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors group">
+<td class="p-3 text-action-blue-dark font-medium">CASE-00005</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-success/15 text-success">Exact Match</span>
+</td>
+<td class="p-3 text-text-primary">EXACT_MATCH</td>
+<td class="p-3 text-right text-text-secondary">₹0.00</td>
+<td class="p-3 text-right text-success">98%</td>
+<td class="p-3 text-right">
+<button class="px-3 py-1 text-text-secondary hover:text-text-primary transition-colors text-xs font-medium">View</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Bottom Section: Cash Forecast & Tax Matching -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<!-- 7-Day Cash Forecast Card -->
+<div class="level-1-card p-lg">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-title-sm text-title-sm text-text-primary">7-Day Cash Forecast</h3>
+<p class="font-label-xs text-label-xs text-text-secondary mt-1">Projected Net Liquidity</p>
+</div>
+<div class="text-right">
+<div class="font-tabular-numeric text-[20px] font-bold text-text-primary">₹2.04L</div>
+<span class="inline-flex items-center gap-1 font-label-xs text-[10px] text-text-secondary mt-1">
+<span class="material-symbols-outlined text-[14px] text-action-blue-dark">analytics</span> 56% Confidence Band
+                                </span>
+</div>
+</div>
+<!-- Simple Line Chart Representation using pure CSS/HTML -->
+<div class="h-32 w-full relative border-l border-b border-border-base mt-4 flex items-end pt-4 pr-2">
+<!-- Y-axis labels -->
+<div class="absolute left-[-30px] top-0 font-label-xs text-[10px] text-text-secondary">10L</div>
+<div class="absolute left-[-25px] top-[50%] font-label-xs text-[10px] text-text-secondary">5L</div>
+<div class="absolute left-[-25px] bottom-0 font-label-xs text-[10px] text-text-secondary">0</div>
+<!-- Confidence Band (Shaded area) -->
+<div class="absolute bottom-0 right-0 w-[50%] h-[30%] bg-action-blue-light rounded-tl-full opacity-50" style="clip-path: polygon(0 100%, 100% 0, 100% 100%);"></div>
+<!-- Historical Line (Solid) -->
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<polyline fill="none" points="0,80 10,75 20,60 30,65 40,50 50,45" stroke="#5E6875" stroke-width="2"></polyline>
+<!-- Projected Line (Dashed) -->
+<polyline fill="none" points="50,45 60,55 70,70 80,65 90,75 100,80" stroke="#2563EB" stroke-dasharray="4,4" stroke-width="2"></polyline>
+</svg>
+<!-- Plot Points -->
+<div class="absolute w-2 h-2 rounded-full bg-text-secondary top-[45%] left-[50%] -translate-x-1/2 -translate-y-1/2 shadow-[0_0_0_2px_#FFFFFF]"></div>
+<div class="absolute w-2 h-2 rounded-full bg-action-blue-dark top-[80%] left-[100%] -translate-x-1/2 -translate-y-1/2 shadow-[0_0_0_2px_#FFFFFF]"></div>
+</div>
+<div class="flex justify-between mt-2 font-label-xs text-[10px] text-text-secondary">
+<span>-7d</span>
+<span class="text-text-primary font-medium">Today</span>
+<span>+7d</span>
+</div>
+<div class="mt-4 pt-4 border-t border-border-base flex justify-between">
+<div class="font-label-xs text-[11px] text-text-secondary">Historical Net: <span class="text-text-primary font-medium">₹8.73L</span></div>
+</div>
+</div>
+<!-- Tax Matching Summary -->
+<div class="level-1-card p-lg flex flex-col">
+<h3 class="font-title-sm text-title-sm text-text-primary mb-6">Tax Matching Summary</h3>
+<div class="flex-1 flex flex-col justify-center gap-6">
+<div class="flex items-center justify-between p-4 bg-success/10 rounded border border-success/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-success text-[28px]">receipt_long</span>
+<div>
+<div class="font-tabular-numeric text-lg font-bold text-success">95</div>
+<div class="font-label-xs text-label-xs text-text-secondary">Exact Matches</div>
+</div>
+</div>
+<span class="font-label-xs text-[10px] px-2 py-1 bg-success/20 text-success rounded">95%</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-warning/10 rounded border border-warning/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-warning text-[28px]">request_quote</span>
+<div>
+<div class="font-tabular-numeric text-lg font-bold text-warning">5</div>
+<div class="font-label-xs text-label-xs text-text-secondary">Rate Mismatches</div>
+</div>
+</div>
+<span class="font-label-xs text-[10px] px-2 py-1 bg-warning/20 text-warning rounded">5%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Right Column (Sidebar panels) -->
+<div class="col-span-12 xl:col-span-4 flex flex-col gap-lg">
+<!-- Quick Actions -->
+<div class="level-1-card p-4 flex gap-2 overflow-x-auto kpi-row-scroll">
+<button class="whitespace-nowrap px-4 py-2 bg-surface-secondary hover:bg-border-base text-text-primary border border-border-base rounded-lg font-label-xs text-xs font-medium transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">troubleshoot</span> Investigate
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface-secondary hover:bg-border-base text-text-primary border border-border-base rounded-lg font-label-xs text-xs font-medium transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">fact_check</span> Review
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 bg-action-blue-light text-action-blue-dark border border-action-blue-light hover:bg-blue-100 rounded-lg font-label-xs text-xs font-medium transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">forum</span> Ask Finance Q&amp;A
+                    </button>
+</div>
+<!-- Risk & Exception Summary -->
+<div class="level-1-card p-lg">
+<h3 class="font-title-sm text-title-sm text-text-primary mb-6">Risk &amp; Exception Summary</h3>
+<div class="space-y-4">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-xs text-label-xs text-text-primary">Amount Mismatch</span>
+<span class="font-tabular-numeric text-sm font-semibold text-warning">12</span>
+</div>
+<div class="w-full bg-surface-secondary rounded-full h-1.5">
+<div class="bg-warning h-1.5 rounded-full" style="width: 35%"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-xs text-label-xs text-text-primary">Duplicate Payment</span>
+<span class="font-tabular-numeric text-sm font-semibold text-critical">9</span>
+</div>
+<div class="w-full bg-surface-secondary rounded-full h-1.5">
+<div class="bg-critical h-1.5 rounded-full" style="width: 26%"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-xs text-label-xs text-text-primary">Missing Settlement</span>
+<span class="font-tabular-numeric text-sm font-semibold text-warning">8</span>
+</div>
+<div class="w-full bg-surface-secondary rounded-full h-1.5">
+<div class="bg-warning h-1.5 rounded-full" style="width: 23%"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-xs text-label-xs text-text-primary">Tax Rate Error</span>
+<span class="font-tabular-numeric text-sm font-semibold text-warning">5</span>
+</div>
+<div class="w-full bg-surface-secondary rounded-full h-1.5">
+<div class="bg-warning h-1.5 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Human Review Queue -->
+<div class="level-1-card overflow-hidden">
+<div class="p-4 border-b border-border-base flex justify-between items-center bg-surface-bright">
+<h3 class="font-title-sm text-title-sm text-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-critical text-[20px]">assignment_late</span> Human Review Queue
+                        </h3>
+<span class="bg-critical/15 text-critical font-tabular-numeric text-[10px] px-2 py-0.5 rounded font-bold">47 PENDING</span>
+</div>
+<div class="p-2 space-y-1">
+<!-- Item 1 -->
+<div class="p-3 bg-surface hover:bg-surface-secondary rounded border border-transparent hover:border-border-base transition-colors flex justify-between items-center group">
+<div>
+<div class="font-tabular-numeric text-sm text-action-blue-dark font-medium mb-0.5">CASE-00001</div>
+<div class="font-label-xs text-[10px] text-critical flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">priority_high</span> High Risk
+                                </div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 px-3 py-1 bg-surface-bright border border-border-base text-text-primary rounded hover:bg-surface-secondary transition-all text-xs font-medium">Review</button>
+</div>
+<!-- Item 2 -->
+<div class="p-3 bg-surface hover:bg-surface-secondary rounded border border-transparent hover:border-border-base transition-colors flex justify-between items-center group">
+<div>
+<div class="font-tabular-numeric text-sm text-action-blue-dark font-medium mb-0.5">CASE-00004</div>
+<div class="font-label-xs text-[10px] text-warning flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">warning</span> Med Risk
+                                </div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 px-3 py-1 bg-surface-bright border border-border-base text-text-primary rounded hover:bg-surface-secondary transition-all text-xs font-medium">Review</button>
+</div>
+<!-- Item 3 -->
+<div class="p-3 bg-surface hover:bg-surface-secondary rounded border border-transparent hover:border-border-base transition-colors flex justify-between items-center group">
+<div>
+<div class="font-tabular-numeric text-sm text-action-blue-dark font-medium mb-0.5">CASE-00017</div>
+<div class="font-label-xs text-[10px] text-warning flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">warning</span> Med Risk
+                                </div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 px-3 py-1 bg-surface-bright border border-border-base text-text-primary rounded hover:bg-surface-secondary transition-all text-xs font-medium">Review</button>
+</div>
+</div>
+<div class="p-3 border-t border-border-base text-center bg-surface-bright">
+<button class="font-label-xs text-label-xs text-text-secondary hover:text-text-primary transition-colors">View All 47 Items</button>
+</div>
+</div>
+<!-- AI Investigation Status & Auditability -->
+<div class="flex flex-col gap-md">
+<div class="level-1-card p-4 border-l-2 border-l-success flex justify-between items-center">
+<div>
+<div class="font-label-xs text-label-xs text-text-secondary uppercase tracking-wider mb-1">AI Agent Status</div>
+<div class="font-tabular-numeric text-sm text-success flex items-center gap-1 font-medium">
+<span class="w-2 h-2 rounded-full bg-success animate-pulse"></span> Operational
+                            </div>
+</div>
+<div class="text-right">
+<div class="font-label-xs text-[10px] text-text-secondary mb-1">Mode: Read-only</div>
+<div class="font-label-xs text-[10px] text-text-secondary">Oversight: Enabled</div>
+</div>
+</div>
+<div class="level-1-card p-4 bg-surface-bright border border-border-base shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-action-blue-dark text-[18px]">gpp_good</span>
+<span class="font-label-xs text-xs font-semibold text-text-primary">Every AI investigation is auditable</span>
+</div>
+<ul class="space-y-2 font-label-xs text-[11px] text-text-secondary">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                Full evidence extraction logged
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                Human review required for execution
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                Immutable audit trail generated
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

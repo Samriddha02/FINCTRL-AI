@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FINCTRL-AI - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#316bf3",
+                        "navy-dark": "#0F1B2D",
+                        "surface-container": "#eceef0",
+                        "text-primary": "#17202A",
+                        "on-tertiary-fixed-variant": "#00504d",
+                        "secondary-fixed": "#dbe1ff",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b7c7e5",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#d5e3ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-container": "#16263d",
+                        "on-surface-variant": "#44474d",
+                        "background": "#f8f9fb",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed": "#00174b",
+                        "on-primary-fixed": "#0b1c32",
+                        "secondary": "#0051d5",
+                        "tertiary-container": "#002b29",
+                        "on-secondary-container": "#fefcff",
+                        "primary": "#011127",
+                        "border-base": "#D9E0E7",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "success": "#10B981",
+                        "text-secondary": "#5E6875",
+                        "on-surface": "#191c1e",
+                        "warning": "#F59E0B",
+                        "tertiary-fixed": "#7ef5ef",
+                        "tertiary-fixed-dim": "#60d9d3",
+                        "surface-bright": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#001413",
+                        "teal-dark": "#0E7F7B",
+                        "action-blue-dark": "#1D4ED8",
+                        "surface": "#FFFFFF",
+                        "surface-tint": "#505f79",
+                        "on-tertiary-fixed": "#00201f",
+                        "primary-fixed-dim": "#b7c7e5",
+                        "on-primary-container": "#7e8da9",
+                        "text-muted": "#87919D",
+                        "info": "#3B82F6",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c5c6ce",
+                        "critical": "#EF4444",
+                        "on-secondary-fixed-variant": "#003ea8",
+                        "surface-secondary": "#F1F4F7",
+                        "action-blue-light": "#EFF6FF",
+                        "on-primary-fixed-variant": "#384760",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#009d98",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#75777e",
+                        "brand-blue": "#2563EB"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "page-padding": "32px",
+                        "sidebar-width": "240px",
+                        "component-gap": "24px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "compact-padding": "12px"
+                    },
+                    "fontFamily": {
+                        "section-title": ["Hanken Grotesk"],
+                        "kpi-primary": ["Hanken Grotesk"],
+                        "caption": ["Inter"],
+                        "page-title": ["Hanken Grotesk"],
+                        "label-sm": ["Inter"],
+                        "body-table-bold": ["Inter"],
+                        "data-tabular": ["Inter"],
+                        "body-table": ["Inter"]
+                    },
+                    "fontSize": {
+                        "section-title": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "kpi-primary": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "caption": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "page-title": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-table-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "data-tabular": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-table": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pattern-dots {
+            background-image: radial-gradient(circle, #384760 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-table text-text-primary antialiased min-h-screen flex flex-col selection:bg-brand-blue selection:text-white">
+<!-- Main Container -->
+<main class="flex-grow flex flex-col md:flex-row w-full min-h-screen">
+<!-- Left Side: Branding & Value Prop (45%) -->
+<section class="hidden md:flex flex-col w-[45%] bg-primary-container relative overflow-hidden px-12 py-16 justify-between">
+<!-- Decorative Background Pattern -->
+<div class="absolute inset-0 pattern-dots opacity-20 pointer-events-none"></div>
+<!-- Abstract Graphic -->
+<div class="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 opacity-10 pointer-events-none flex justify-center">
+<div class="w-[600px] h-[600px] rounded-full border border-teal-dark absolute"></div>
+<div class="w-[400px] h-[400px] rounded-full border border-teal-dark absolute mt-[100px]"></div>
+<div class="w-[200px] h-[200px] rounded-full bg-teal-dark blur-3xl absolute mt-[200px]"></div>
+</div>
+<div class="relative z-10">
+<div class="mb-12">
+<img alt="FINCTRL-AI Logo" class="h-10 mb-4 brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDjT3duWWkMQ9r1ypC6XIdxvWf5OQueKiTvCVIOkxoAMvIE5SX2ixbD75LfejqeFnPt_Gza53s7NDdOLZEeoaMrL4YMsixPY1Nx4uYEWOHQ0sKmLYlAfvFUv94e-NY56yFDaYRuBLMpdsUDYqGXMB3eoQJF8BD9u_2CC94hxc9NFqlHguAlXam8iiSHIoH8TYJdAehl5pJ85z1lTqlOf8AIfHXD_TrXpBavCC8HNSDIdWbAOGL_jMFRWeZzVSfsqbJ"/>
+<p class="text-on-primary-fixed-variant font-label-sm uppercase tracking-widest text-xs">AI Finance Control</p>
+</div>
+<h1 class="font-page-title text-4xl text-on-primary font-bold mb-6 leading-tight max-w-lg">
+                    Intelligent financial control.<br/>Built for finance teams.
+                </h1>
+<p class="font-body-table text-inverse-primary text-base mb-12 max-w-md leading-relaxed">
+                    Monitor reconciliation, investigate exceptions, forecast cash, match taxes, and maintain a complete audit trail with AI-assisted financial operations.
+                </p>
+<ul class="space-y-4 font-body-table text-on-primary text-sm">
+<li class="flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined text-teal-dark mr-3 text-lg">check_circle</span>
+                        Evidence-backed investigations
+                    </li>
+<li class="flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined text-teal-dark mr-3 text-lg">check_circle</span>
+                        Human oversight
+                    </li>
+<li class="flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined text-teal-dark mr-3 text-lg">check_circle</span>
+                        Deterministic financial controls
+                    </li>
+<li class="flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined text-teal-dark mr-3 text-lg">check_circle</span>
+                        Complete audit trail
+                    </li>
+</ul>
+</div>
+<div class="relative z-10 mt-auto pt-12">
+<p class="font-caption text-on-primary-fixed-variant">System Status: <span class="text-success font-medium">All systems operational</span></p>
+</div>
+</section>
+<!-- Right Side: Login Form (55%) -->
+<section class="w-full md:w-[55%] bg-background flex flex-col justify-center items-center px-6 py-12 md:px-24 relative">
+<!-- Mobile Logo -->
+<div class="md:hidden mb-10 text-center">
+<img alt="FINCTRL-AI Logo" class="h-8 mx-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_UiCehIX--ZojK-2NTLw7pcsDhMkcioPCgwvzA5R-mDxmkdL5InxNqq0jN6wcNcd-y3WKrojQmUfYTnqXVd4i9Cq3TFRx88XeG1eZGiKqxRXWAzKE7sd3SXZ5wC_nJuy_L3lapBxHsU2Or-km-yZ-jAKijzHVFob0r0Ts4USul7WC-Hr0yLOeiDacC7hpUOVy-09PohUI5UYkRp6SGDKrw3CNTqYXp-qta1Z27ZixeHD7YdtybNc0oHOR2qUIB85G"/>
+</div>
+<!-- Login Card -->
+<div class="w-full max-w-[440px] bg-surface border border-border-base rounded-xl shadow-sm p-8 md:p-10 z-10">
+<div class="mb-8 text-center md:text-left">
+<h2 class="font-page-title text-2xl text-text-primary mb-2">Welcome back</h2>
+<p class="font-body-table text-text-secondary text-sm">Sign in to your FINCTRL-AI control center.</p>
+</div>
+<form class="space-y-5" onsubmit="event.preventDefault();">
+<!-- Email Input -->
+<div>
+<label class="block font-label-sm text-text-primary mb-1.5" for="email">Work Email</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-sm">mail</span>
+</div>
+<input class="block w-full pl-9 pr-3 py-2 border border-border-base rounded bg-surface text-text-primary font-body-table text-sm focus:ring-1 focus:ring-brand-blue focus:border-brand-blue placeholder-text-muted transition-colors" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div>
+<label class="block font-label-sm text-text-primary mb-1.5" for="password">Password</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-sm">lock</span>
+</div>
+<input class="block w-full pl-9 pr-10 py-2 border border-border-base rounded bg-surface text-text-primary font-body-table text-sm focus:ring-1 focus:ring-brand-blue focus:border-brand-blue placeholder-text-muted transition-colors" id="password" name="password" placeholder="Enter your password" required="" type="password"/>
+<button aria-label="Toggle password visibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-text-primary focus:outline-none" onclick="const p = document.getElementById('password'); p.type = p.type === 'password' ? 'text' : 'password'; const i = this.querySelector('span'); i.textContent = i.textContent === 'visibility' ? 'visibility_off' : 'visibility';" type="button">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+<!-- Options Row -->
+<div class="flex items-center justify-between mt-2 mb-6">
+<div class="flex items-center">
+<input class="h-4 w-4 text-brand-blue focus:ring-brand-blue border-border-base rounded cursor-pointer" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block font-body-table text-sm text-text-secondary cursor-pointer" for="remember-me">
+                                Remember me
+                            </label>
+</div>
+<div class="text-sm">
+<a class="font-body-table text-brand-blue hover:text-action-blue-dark hover:underline font-medium" href="#">
+                                Forgot password?
+                            </a>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded shadow-sm font-body-table-bold text-sm text-white bg-brand-blue hover:bg-action-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue transition-colors" type="submit">
+                        Sign In
+                    </button>
+</form>
+<!-- Demo Access -->
+<div class="mt-8 pt-6 border-t border-border-base text-center">
+<p class="font-caption text-text-secondary uppercase tracking-wider mb-4">Demo Environment</p>
+<button class="w-full flex justify-center items-center py-2 px-4 border border-border-base rounded shadow-sm font-body-table text-sm text-text-primary bg-surface hover:bg-surface-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue transition-colors" type="button">
+<span class="material-symbols-outlined text-text-muted mr-2 text-sm">explore</span>
+                        Continue with Demo Account
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Footer -->
+<footer class="w-full bg-surface border-t border-border-base py-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between fixed bottom-0 z-50 text-xs">
+<div class="flex items-center space-x-4 mb-2 md:mb-0">
+<span class="font-label-sm text-text-secondary font-medium">FINCTRL-AI © 2026</span>
+<a class="font-caption text-text-muted hover:text-text-primary transition-colors" href="#">Privacy</a>
+<a class="font-caption text-text-muted hover:text-text-primary transition-colors" href="#">Security</a>
+<a class="font-caption text-text-muted hover:text-text-primary transition-colors" href="#">Audit Policy</a>
+</div>
+<div class="flex items-center text-text-muted font-caption">
+<span class="material-symbols-outlined text-[14px] mr-1">security</span>
+            Protected financial operations environment. Your activity is recorded in the audit trail.
+        </div>
+</footer>
+</body></html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FINCTRL-AI - Cash Forecast</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "on-background": "#191c1e",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#002b29",
+                      "on-primary-fixed": "#0b1c32",
+                      "surface-container-high": "#e6e8ea",
+                      "on-tertiary-fixed-variant": "#00504d",
+                      "on-tertiary-container": "#009d98",
+                      "tertiary-fixed-dim": "#60d9d3",
+                      "action-blue-light": "#EFF6FF",
+                      "on-primary-fixed-variant": "#384760",
+                      "tertiary-fixed": "#7ef5ef",
+                      "on-primary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#00174b",
+                      "info": "#3B82F6",
+                      "primary-fixed-dim": "#b7c7e5",
+                      "text-secondary": "#5E6875",
+                      "secondary-container": "#316bf3",
+                      "text-primary": "#17202A",
+                      "background": "#f8f9fb",
+                      "outline": "#75777e",
+                      "on-tertiary-fixed": "#00201f",
+                      "primary-fixed": "#d5e3ff",
+                      "critical": "#EF4444",
+                      "surface-container": "#eceef0",
+                      "primary": "#011127",
+                      "surface-bright": "#f8f9fb",
+                      "inverse-primary": "#b7c7e5",
+                      "on-surface-variant": "#44474d",
+                      "navy-dark": "#0F1B2D",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#dbe1ff",
+                      "surface-secondary": "#F1F4F7",
+                      "surface-variant": "#e0e3e5",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-container-low": "#f2f4f6",
+                      "on-surface": "#191c1e",
+                      "on-secondary-container": "#fefcff",
+                      "teal-dark": "#0E7F7B",
+                      "on-primary-container": "#7e8da9",
+                      "on-secondary-fixed-variant": "#003ea8",
+                      "warning": "#F59E0B",
+                      "text-muted": "#87919D",
+                      "success": "#10B981",
+                      "border-base": "#D9E0E7",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#505f79",
+                      "outline-variant": "#c5c6ce",
+                      "surface-dim": "#d8dadc",
+                      "action-blue-dark": "#1D4ED8",
+                      "surface-container-highest": "#e0e3e5",
+                      "primary-container": "#16263d",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "secondary": "#0051d5",
+                      "tertiary": "#001413",
+                      "surface": "#FFFFFF"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "base": "8px",
+                      "compact-padding": "12px",
+                      "page-padding": "32px",
+                      "sidebar-width": "240px",
+                      "component-gap": "24px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "kpi-primary": [
+                              "Hanken Grotesk"
+                      ],
+                      "page-title": [
+                              "Hanken Grotesk"
+                      ],
+                      "section-title": [
+                              "Hanken Grotesk"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ],
+                      "body-table": [
+                              "Inter"
+                      ],
+                      "body-table-bold": [
+                              "Inter"
+                      ],
+                      "data-tabular": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "kpi-primary": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "page-title": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "section-title": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "caption": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-table": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-table-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-tabular": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          .material-symbols-outlined {
+              font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+          }
+      </style>
+</head>
+<body class="bg-background text-text-primary font-body-table antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-240px)] h-16 z-30 flex justify-between items-center px-page-padding bg-surface dark:bg-surface-dim border-b border-border-base dark:border-outline-variant flat no shadows">
+<div class="flex items-center gap-gutter">
+<span class="font-page-title text-page-title font-black text-primary dark:text-inverse-primary">FINCTRL-AI</span>
+<div class="flex gap-base">
+<button class="px-3 py-1.5 rounded-DEFAULT border border-border-base hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors text-text-secondary dark:text-on-surface-variant font-label-sm text-label-sm">
+                    Entity Selector
+                </button>
+<button class="px-3 py-1.5 rounded-DEFAULT border border-border-base hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors text-text-secondary dark:text-on-surface-variant font-label-sm text-label-sm">
+                    Date Range
+                </button>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<button class="text-text-secondary hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-text-secondary hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-border-base object-cover" data-alt="A small circular avatar placeholder image showing a professional, minimalist silhouette icon against a soft light gray background. It is meant to represent a generic user profile picture in a clean, modern interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWT2yN6Es60IqokkBZ1rGSIpZ8VnskFzZxQY0jbKf4L4cfwpkBMbOg80qGmrKedyD6KbY9RX_8lEIvZU3A_cQZhsqT7DqyNCsmskS97QfJvaWNXbp4gCgUYtuGbyif0PjVuorC3b3WyIBvPpAGbSO7a332-sPLko6RUgpulBkR5P2C-EGBguYVtR7F_Y_2MAoQBisLPdgaMI3HY0tNuRJkM2qO9-1ReI4szsA2rHwcBKOBjJjaxG4"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed h-full left-0 z-40 flex flex-col bg-primary dark:bg-navy-dark docked h-screen w-sidebar-width left-0 top-0 flat no shadows bg-primary dark:bg-navy-dark">
+<div class="p-page-padding flex flex-col items-center">
+<img alt="FINCTRL-AI Logo" class="w-12 h-12 mb-4 rounded-lg object-cover" data-alt="A minimalist, modern corporate logo showing an abstract geometric 'F' shape in pristine white, placed centrally within a dark navy blue background. The style is sharp, clean, and professional, suitable for a high-end enterprise finance software brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzIW5_hYYryw90le8J3a0D4ZZzHoxaQyvrEzsJ_mO7uWGVmSBd0TxtrZoiHjiizi-c_apu86FLy0GzMKLM3nPFROBblXIN32kiorjOIv1xOysFoV6SG2gLPK1GDyKkAmhc2FJ2oBbskkPh5ug2YnIix0_P9j1ZSXGOaOBSnfTJ8SZGKhvtoi259UB0jTejnhv_trqtQXalvek9SNJHMabAWT2SbDrwX8qcwTAgekRFZ4MXTMiHsVo"/>
+<div class="font-page-title text-page-title font-bold text-on-primary">FINCTRL-AI</div>
+<div class="text-on-primary-container font-label-sm text-label-sm mt-1">Enterprise Finance</div>
+</div>
+<div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+                Reconciliation
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="troubleshoot">troubleshoot</span>
+                Investigation
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                Exceptions
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-secondary-fixed-dim bg-primary-container font-bold border-l-4 border-secondary-container hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm opacity-90 scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                Cash Forecast
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="calculate">calculate</span>
+                Tax Matching
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+                Finance Q&amp;A
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                Audit Trail
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+                Case Review
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-primary-container/50 transition-colors duration-200 font-label-sm text-label-sm mt-auto mb-4" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="ml-[240px] pt-16 min-h-screen">
+<div class="max-w-[1440px] mx-auto p-page-padding">
+<!-- Page Header Section -->
+<div class="flex justify-between items-end mb-component-gap">
+<div>
+<h1 class="font-page-title text-page-title text-text-primary mb-1">Cash Forecast</h1>
+<p class="font-body-table text-text-secondary">Deterministic short-term cash-flow outlook with confidence and risk factors.</p>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-text-muted">As-of Date</label>
+<select class="form-select text-data-tabular font-data-tabular border-border-base rounded-DEFAULT py-1.5 px-3 focus:border-action-blue-dark focus:ring-action-blue-dark h-[36px]">
+<option>Oct 24, 2023</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-text-muted">Lookback</label>
+<select class="form-select text-data-tabular font-data-tabular border-border-base rounded-DEFAULT py-1.5 px-3 focus:border-action-blue-dark focus:ring-action-blue-dark h-[36px]">
+<option>30 Days</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-text-muted">Horizon</label>
+<select class="form-select text-data-tabular font-data-tabular border-border-base rounded-DEFAULT py-1.5 px-3 focus:border-action-blue-dark focus:ring-action-blue-dark h-[36px]">
+<option>7 Days</option>
+</select>
+</div>
+<button class="bg-action-blue-dark text-on-primary font-body-table-bold text-body-table-bold px-4 py-1.5 rounded-DEFAULT h-[36px] mt-auto hover:bg-secondary-container transition-colors shadow-sm">
+                        Generate Forecast
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Summary Cards Row (Spans full width) -->
+<div class="col-span-12 grid grid-cols-5 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col justify-between h-[100px]">
+<span class="font-label-sm text-label-sm text-text-secondary">Historical Inflow</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-text-primary">₹8.99L</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col justify-between h-[100px]">
+<span class="font-label-sm text-label-sm text-text-secondary">Historical Outflow</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-text-primary">₹25.46K</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col justify-between h-[100px]">
+<span class="font-label-sm text-label-sm text-text-secondary">Historical Net</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-text-primary">₹8.73L</span>
+</div>
+</div>
+<!-- Card 4 (Highlighted) -->
+<div class="bg-surface border border-info rounded-lg p-compact-padding flex flex-col justify-between h-[100px] relative overflow-hidden">
+<div class="absolute inset-0 bg-info opacity-5"></div>
+<span class="font-label-sm text-label-sm text-info relative z-10 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">monitoring</span>
+                            Projected 7-Day Net
+                        </span>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-kpi-primary text-kpi-primary text-text-primary">₹2.04L</span>
+</div>
+</div>
+<!-- Card 5 (Confidence) -->
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col justify-between h-[100px]">
+<span class="font-label-sm text-label-sm text-text-secondary">Confidence</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-warning">56%</span>
+<span class="material-symbols-outlined text-warning text-[20px]" data-icon="policy">policy</span>
+</div>
+</div>
+</div>
+<!-- Main Chart Area -->
+<div class="col-span-8 bg-surface border border-border-base rounded-lg p-4 flex flex-col h-[500px]">
+<h3 class="font-section-title text-section-title text-text-primary mb-4 flex items-center justify-between">
+                        Net Cash Flow Projection
+                        <span class="font-label-sm text-label-sm text-text-secondary font-normal border border-border-base px-2 py-1 rounded bg-surface-container-lowest">INR (₹)</span>
+</h3>
+<!-- Chart Placeholder -->
+<div class="flex-1 relative w-full border-b border-l border-border-base">
+<!-- Y-Axis Labels -->
+<div class="absolute left-[-40px] top-0 h-full flex flex-col justify-between text-caption font-caption text-text-muted text-right w-[32px]">
+<span>10L</span>
+<span>8L</span>
+<span>6L</span>
+<span>4L</span>
+<span>2L</span>
+<span>0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between">
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<div class="w-full h-[1px] bg-border-base"></div>
+</div>
+<!-- Mock Data Visualization -->
+<div class="absolute inset-0 flex items-end">
+<!-- Historical Area -->
+<div class="w-1/2 h-full relative border-r border-dashed border-outline-variant">
+<!-- Solid Line Mock (SVG would go here, simulating with CSS clip-path for shape) -->
+<div class="absolute bottom-0 left-0 w-full h-[70%] border-t-2 border-action-blue-dark" style="clip-path: polygon(0 40%, 20% 35%, 40% 60%, 60% 45%, 80% 20%, 100% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, rgba(29, 78, 216, 0.1) 0%, rgba(255,255,255,0) 100%); border-top-color: transparent;"></div>
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M0,150 L50,140 L100,180 L150,160 L200,100 L250,50 L300,80" fill="none" stroke="#1D4ED8" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Projected Area -->
+<div class="w-1/2 h-full relative">
+<!-- Uncertainty Band -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M0,80 L50,100 L100,120 L150,110 L200,130 L250,150 L300,160 L300,220 L250,210 L200,190 L150,180 L100,190 L50,180 L0,160 Z" fill="rgba(29, 78, 216, 0.05)"></path>
+<!-- Dashed Line -->
+<path d="M0,80 L50,120 L100,150 L150,140 L200,160 L250,180 L300,190" fill="none" stroke="#1D4ED8" stroke-dasharray="4 4" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Date Overlay -->
+<div class="absolute top-2 left-[50%] transform -translate-x-1/2 bg-surface border border-border-base px-2 py-1 rounded text-caption font-caption font-bold text-text-primary z-10 shadow-sm">
+                            Today
+                        </div>
+</div>
+<!-- X-Axis Labels -->
+<div class="w-full flex justify-between mt-2 pl-2 text-caption font-caption text-text-muted">
+<span>Oct 1</span>
+<span>Oct 8</span>
+<span>Oct 15</span>
+<span>Oct 24</span>
+<span>Oct 27</span>
+<span>Oct 31</span>
+</div>
+<!-- Legend -->
+<div class="flex justify-center gap-6 mt-4 pt-4 border-t border-border-base">
+<div class="flex items-center gap-2">
+<div class="w-4 h-[2px] bg-action-blue-dark"></div>
+<span class="font-label-sm text-label-sm text-text-secondary">Historical Net</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-[2px] bg-action-blue-dark border-dashed border-b-2 border-surface" style="border-bottom-color: white; border-bottom-width: 1px;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary">Projected Net</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-info opacity-20 rounded-sm"></div>
+<span class="font-label-sm text-label-sm text-text-secondary">95% Confidence Interval</span>
+</div>
+</div>
+</div>
+<!-- Analysis Sidebar -->
+<div class="col-span-4 flex flex-col gap-gutter">
+<!-- Detailed Projection Box -->
+<div class="bg-surface border border-border-base rounded-lg p-4">
+<h3 class="font-section-title text-section-title text-text-primary mb-3">7-Day Projection Detail</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="font-body-table text-body-table text-text-secondary">Projected Inflow</span>
+<span class="font-data-tabular text-data-tabular text-success font-medium">₹2.10L</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="font-body-table text-body-table text-text-secondary">Projected Outflow</span>
+<span class="font-data-tabular text-data-tabular text-text-primary font-medium">₹5.94K</span>
+</div>
+<div class="flex justify-between items-center pt-1">
+<span class="font-body-table-bold text-body-table-bold text-text-primary">Net Position</span>
+<span class="font-data-tabular text-data-tabular text-info font-bold">₹2.04L</span>
+</div>
+</div>
+</div>
+<!-- Confidence & Risk Factors -->
+<div class="bg-surface border border-border-base rounded-lg p-4 flex-1">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-section-title text-section-title text-text-primary">Risk Assessment</h3>
+<span class="bg-warning/10 text-warning px-2 py-1 rounded-full font-label-sm text-label-sm font-bold flex items-center gap-1 border border-warning/20">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                Med Risk
+                            </span>
+</div>
+<div class="mb-4">
+<p class="font-label-sm text-label-sm text-text-secondary mb-2 uppercase tracking-wider">Active Risk Factors</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-start gap-2 bg-error-container/20 p-2 rounded border border-error-container">
+<span class="material-symbols-outlined text-error text-[16px] mt-0.5">error</span>
+<div>
+<div class="font-body-table-bold text-body-table-bold text-on-surface">Amount Mismatch Detected</div>
+<div class="font-caption text-caption text-text-secondary">Historical data shows variance in expected vs settled amounts for Vendor A.</div>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-surface-container-low p-2 rounded border border-border-base">
+<span class="material-symbols-outlined text-warning text-[16px] mt-0.5">content_copy</span>
+<div>
+<div class="font-body-table-bold text-body-table-bold text-on-surface">Duplicate Transaction Flag</div>
+<div class="font-caption text-caption text-text-secondary">Recent batch contains potential duplicates impacting short-term outflow prediction.</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-text-secondary mb-2 uppercase tracking-wider">Data Quality Inputs</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-secondary text-text-primary rounded text-caption font-caption border border-border-base">Settlements</span>
+<span class="px-2 py-1 bg-surface-secondary text-text-primary rounded text-caption font-caption border border-border-base">Refunds</span>
+<span class="px-2 py-1 bg-surface-secondary text-text-primary rounded text-caption font-caption border border-border-base">Fees</span>
+<span class="px-2 py-1 bg-surface-secondary text-text-primary rounded text-caption font-caption border border-border-base">Taxes</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-border-base">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-info text-[18px]">psychology</span>
+<span class="font-body-table-bold text-body-table-bold text-text-primary">AI Explanation</span>
+</div>
+<p class="font-caption text-caption text-text-secondary bg-action-blue-light p-2 rounded border border-info/20 italic">
+                                 "Numbers validated against deterministic forecast. The 56% confidence score is influenced primarily by historical volatility in the Lookback period and pending reconciliation risks."
+                             </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

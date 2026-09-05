@@ -1,0 +1,1109 @@
+# FINCTRL-AI --- Frontend Design Specification
+
+## 1. Product
+
+**Product:** FINCTRL-AI\
+**Tagline:** Your AI Financial Controller\
+**Domain:** Enterprise fintech / financial operations / AI-assisted
+financial control
+
+FINCTRL-AI is a serious enterprise financial controller platform. It
+detects reconciliation exceptions, investigates transaction
+discrepancies, explains root causes using evidence, forecasts cash,
+matches taxes, answers finance questions, maintains an immutable audit
+trail, and routes cases for human approval.
+
+The UI must feel like a production enterprise finance-control system ---
+**not a chatbot, student dashboard, consumer banking app, or flashy AI
+landing page.**
+
+------------------------------------------------------------------------
+
+## 2. Design Goals
+
+1.  Make financial information immediately understandable.
+2.  Make exceptions and discrepancies highly visible without creating
+    visual noise.
+3.  Always connect AI conclusions to **evidence and confidence**.
+4.  Make human approval clearly distinct from AI recommendations.
+5.  Support dense financial data while remaining easy to scan.
+6.  Create one coherent design system across every screen.
+7.  Prioritize auditability, traceability, trust, and operational
+    workflows.
+
+Core visual principle:
+
+> **AI recommends → Evidence supports → Human decides**
+
+------------------------------------------------------------------------
+
+## 3. Technology / UI Context
+
+The frontend is intended for:
+
+-   React
+-   Tailwind CSS
+-   Recharts
+-   Desktop-first enterprise web application
+-   Responsive behavior for smaller screens
+
+Design components should be reusable and consistent across all pages.
+
+------------------------------------------------------------------------
+
+## 4. Overall Visual Language
+
+### Style
+
+-   Premium enterprise fintech
+-   Clean
+-   Minimal
+-   Information-dense
+-   Precise
+-   Professional
+-   Calm
+-   Trustworthy
+-   Operational
+
+### Avoid
+
+-   Chatbot-like layouts
+-   Consumer-finance aesthetics
+-   Student-dashboard aesthetics
+-   Excessive rounded cards
+-   Excessive shadows
+-   Glassmorphism
+-   Neon colors
+-   Large gradients
+-   Decorative illustrations
+-   AI robots
+-   Emojis
+-   Unnecessary animation
+-   Excessive empty space
+-   Marketing-style hero sections
+
+------------------------------------------------------------------------
+
+## 5. Color System
+
+Use a restrained corporate palette.
+
+### Primary
+
+-   Deep Navy: `#16263D`
+-   Navy Dark: `#0F1B2D`
+-   Teal: `#16A6A1`
+-   Teal Dark: `#0E7F7B`
+
+### Neutrals
+
+-   Background: `#F6F8FA`
+-   Surface: `#FFFFFF`
+-   Surface Secondary: `#F1F4F7`
+-   Border: `#D9E0E7`
+-   Text Primary: `#17202A`
+-   Text Secondary: `#5E6875`
+-   Text Muted: `#87919D`
+
+### Semantic
+
+-   Success: restrained green
+-   Warning: restrained amber
+-   Critical / discrepancy: restrained red
+-   Informational: restrained blue
+
+Use semantic colors only where they communicate meaning.
+
+Red should primarily indicate: - discrepancy - critical exception -
+failed validation - rejection
+
+Green should primarily indicate: - reconciled - verified - resolved -
+approved
+
+Amber should primarily indicate: - warning - pending review - medium
+risk
+
+------------------------------------------------------------------------
+
+## 6. Typography
+
+Use **Inter** or another clean grotesque sans-serif.
+
+Hierarchy:
+
+-   Page title: 24--28px, semibold
+-   Section title: 16--18px, semibold
+-   Body: 14px
+-   Secondary text: 12--13px
+-   Table text: 13--14px
+-   KPI numbers: 24--32px, semibold/bold
+-   Monetary values: tabular figures
+
+Use `font-variant-numeric: tabular-nums` for financial numbers.
+
+Never use decorative display fonts.
+
+------------------------------------------------------------------------
+
+## 7. Layout
+
+### Application Shell
+
+Persistent left sidebar + top header + scrollable content area.
+
+Suggested desktop proportions:
+
+-   Sidebar: approximately 240px
+-   Main content: flexible
+-   Content max-width: approximately 1440px
+-   Page padding: 24--32px
+
+Use an 8px spacing system.
+
+### Sidebar
+
+Top:
+
+**FINCTRL-AI**
+
+Navigation:
+
+-   Dashboard
+-   Reconciliation
+-   Investigation
+-   Exceptions
+-   Cash Forecast
+-   Tax Matching
+-   Finance Q&A
+-   Audit Trail
+-   Case Review
+-   Settings
+
+The active page should use a restrained teal/navy selected state.
+
+Sidebar should be quiet and functional, not decorative.
+
+### Header
+
+Include:
+
+-   Business/account selector
+-   Current date or date range
+-   Notifications
+-   User profile
+
+Keep the header compact.
+
+------------------------------------------------------------------------
+
+# 8. Reusable Components
+
+Build a shared component system.
+
+### KPI Card
+
+Contains:
+
+-   Label
+-   Primary value
+-   Optional percentage/change
+-   Small contextual description
+-   Optional status indicator
+
+Do not overdecorate KPI cards.
+
+### Status Badge
+
+Examples:
+
+-   Matched
+-   Investigating
+-   Exception
+-   Resolved
+-   Pending
+-   Approved
+-   Rejected
+
+### Confidence Meter
+
+Always display the numeric percentage.
+
+Example:
+
+**94% confidence**
+
+The confidence indicator must never be shown without contextual
+evidence.
+
+### Evidence Chip
+
+Examples:
+
+-   CASE-00241
+-   ORD-00081
+-   PAYMENT-00482
+-   SETTLEMENT-00219
+
+Clickable and visually distinct but restrained.
+
+### Data Table
+
+Features:
+
+-   sortable columns
+-   compact rows
+-   sticky header where appropriate
+-   status badges
+-   right-aligned monetary values
+-   clear row actions
+-   pagination or controlled scrolling
+
+### Evidence Panel
+
+Shows:
+
+-   evidence type
+-   record ID
+-   timestamp
+-   amount
+-   source
+-   relevance
+
+### Timeline
+
+Used for investigation and audit trail.
+
+Each event includes:
+
+-   timestamp
+-   actor
+-   event type
+-   description
+-   evidence/reference ID
+
+### Primary Button
+
+Use deep navy or restrained teal.
+
+### Secondary Button
+
+White/light surface with border.
+
+### Destructive Button
+
+Reserved for reject/delete/critical actions.
+
+------------------------------------------------------------------------
+
+# 9. Global UX States
+
+Every major screen must support:
+
+### Loading
+
+Use subtle skeleton rows/cards.
+
+Do not use large spinners as the primary loading experience.
+
+### Empty
+
+Example:
+
+**No reconciliation exceptions found**
+
+Include a short explanation and, when appropriate, a relevant action.
+
+### Error
+
+Example:
+
+**Unable to load reconciliation data**
+
+Include:
+
+**Retry**
+
+Do not show a blank page.
+
+### Success
+
+Use restrained status feedback.
+
+------------------------------------------------------------------------
+
+# 10. Dashboard
+
+## Purpose
+
+At-a-glance financial health.
+
+## Header
+
+**Financial Control Dashboard**
+
+Subtitle:
+
+**At-a-glance view of financial health and active controls**
+
+## KPI Row
+
+-   Total transactions
+-   Reconciled %
+-   Open exceptions
+-   Cash position
+-   Exception value
+
+Example:
+
+-   128,420 transactions
+-   96.8% reconciled
+-   37 open exceptions
+-   ₹12.4M cash position
+-   ₹842K exception value
+
+## Main Visuals
+
+### Match Rate Trend
+
+Line chart showing reconciliation percentage over time.
+
+### Exception Funnel
+
+Stages:
+
+Transactions → Potential mismatches → Validated exceptions →
+Investigations → Resolved
+
+### Cash Position Sparkline
+
+Compact trend.
+
+### Recent High-Priority Exceptions
+
+Table with:
+
+-   Case ID
+-   Type
+-   Amount
+-   Confidence
+-   Status
+-   Last updated
+
+------------------------------------------------------------------------
+
+# 11. Reconciliation
+
+## Purpose
+
+Browse and manage reconciliation cases.
+
+## Header
+
+**Reconciliation**
+
+Subtitle:
+
+**Browse and manage reconciliation cases**
+
+## Controls
+
+-   Search cases
+-   Date range
+-   Status filter
+-   Reason-code filter
+-   Amount range
+-   Run Reconciliation
+
+## Main Table
+
+Columns:
+
+-   Case ID
+-   Order ID
+-   Transaction
+-   Expected
+-   Actual
+-   Difference
+-   Reason Code
+-   Confidence
+-   Status
+-   Updated
+
+Use INR and tabular numeric alignment.
+
+## Case Detail
+
+Selecting a row can expose:
+
+-   case summary
+-   expected amount
+-   actual amount
+-   difference
+-   reason code
+-   evidence count
+-   recommended action
+
+------------------------------------------------------------------------
+
+# 12. Investigation
+
+## Importance
+
+This is the **signature visual of FINCTRL-AI**.
+
+The investigation page should make the evidence chain the dominant
+visual element.
+
+## Header
+
+**Investigation --- CASE-00241**
+
+Show:
+
+-   Open Exception
+-   Amount at risk
+-   AI Confidence
+
+## Evidence Graph
+
+Create a large horizontal evidence graph:
+
+**Order → Payment → Refund → Fee → Tax → Settlement → Bank**
+
+Each node contains:
+
+-   entity name
+-   record ID
+-   amount
+-   timestamp
+-   status
+
+Nodes are connected by clean lines/arrows.
+
+The discrepancy point must be visually obvious using:
+
+-   restrained red outline
+-   delta badge
+-   expected value
+-   actual value
+
+Example:
+
+Expected: ₹12,500\
+Actual: ₹11,850\
+Delta: -₹650
+
+Nodes should appear interactive/clickable.
+
+## Analysis Panels
+
+### Evidence
+
+Show supporting records and counts.
+
+### Hypotheses
+
+Rank possible causes.
+
+Example:
+
+1.  Duplicate refund --- 94%
+2.  Settlement timing mismatch --- 81%
+3.  Fee calculation discrepancy --- 72%
+4.  Tax mismatch --- 61%
+
+Each hypothesis includes:
+
+-   confidence
+-   evidence count
+-   status
+
+### AI Finding
+
+Example:
+
+**Settlement amount differs from expected amount due to an incorrect fee
+adjustment.**
+
+Show:
+
+-   Confidence: 94%
+-   Evidence: 7 records
+-   Reason code: FEE_MISMATCH
+
+## Recommended Action
+
+Actions:
+
+-   Approve Resolution
+-   Escalate
+-   Request Review
+
+------------------------------------------------------------------------
+
+# 13. Exceptions
+
+## Purpose
+
+Work queue of open exceptions.
+
+## Header
+
+**Exceptions**
+
+Subtitle:
+
+**Review and resolve open financial exceptions**
+
+## Controls
+
+-   Search
+-   Status
+-   Reason code
+-   Severity
+-   Amount
+-   Date range
+
+## Summary
+
+Show:
+
+**37 Open Exceptions**
+
+**₹842K Total Exposure**
+
+## Table
+
+Columns:
+
+-   Case ID
+-   Exception Type
+-   Order ID
+-   Amount
+-   Reason Code
+-   AI Confidence
+-   Age
+-   Priority
+-   Status
+-   Action
+
+Every row should have a clear:
+
+**Investigate**
+
+action.
+
+------------------------------------------------------------------------
+
+# 14. Cash Forecast
+
+## Purpose
+
+7/30/90-day cash visibility.
+
+## Header
+
+**Cash Forecast**
+
+Subtitle:
+
+**Projected cash position across multiple planning horizons**
+
+## Horizon Toggle
+
+-   7 Days
+-   30 Days
+-   90 Days
+
+## KPIs
+
+-   Current Cash
+-   Expected Inflows
+-   Expected Outflows
+-   Projected Minimum
+-   Forecast Confidence
+
+## Main Chart
+
+Show:
+
+-   Opening Cash
+-   Expected Inflows
+-   Expected Outflows
+-   Projected Closing Cash
+
+Clearly distinguish known/actual values from estimated values.
+
+## Forecast Drivers
+
+Table:
+
+-   Category
+-   Expected Amount
+-   Confidence
+-   Source
+-   Impact
+
+Examples:
+
+-   Settlements
+-   Refunds
+-   Vendor Payments
+-   Taxes
+-   Fees
+
+## Risk Window
+
+Highlight dates where projected cash crosses below a configured
+threshold.
+
+------------------------------------------------------------------------
+
+# 15. Tax Matching
+
+## Purpose
+
+Review mismatches across invoice, tax, payment and settlement records.
+
+## Header
+
+**Tax Matching**
+
+Subtitle:
+
+**Identify and review tax mismatches**
+
+## Controls
+
+-   Search
+-   Tax type
+-   Mismatch type
+-   Date range
+-   Status
+
+## Evidence Chain
+
+**Invoice → Tax → Payment → Settlement**
+
+Each stage shows:
+
+-   ID
+-   Amount
+-   Tax amount
+-   Date
+-   Status
+
+Highlight mismatches using a restrained red outline and delta badge.
+
+Example:
+
+Invoice: ₹100,000\
+Expected GST: ₹18,000\
+Recorded GST: ₹17,500\
+Difference: ₹500
+
+## Mismatch Analysis
+
+Show:
+
+-   Mismatch type
+-   AI confidence
+-   Evidence
+-   Recommended action
+
+------------------------------------------------------------------------
+
+# 16. Finance Q&A
+
+## Purpose
+
+Chat-style financial query interface.
+
+Important:
+
+**Do not make this look like ChatGPT.**
+
+It is an enterprise financial intelligence workstation.
+
+## Header
+
+**Finance Q&A**
+
+Subtitle:
+
+**Ask questions about your financial records**
+
+## Query Thread
+
+Example:
+
+User:
+
+**Why did settlement variance increase this week?**
+
+AI answer:
+
+**Settlement variance increased primarily because of fee adjustments
+across 14 transactions.**
+
+Then immediately show:
+
+### Evidence
+
+-   CASE-00241
+-   CASE-00256
+-   CASE-00271
+-   SETTLEMENT-00482
+
+Show:
+
+**14 supporting records**
+
+**91% confidence**
+
+Action:
+
+**View Investigation**
+
+## Suggested Queries
+
+-   Why did settlement variance increase?
+-   Show unresolved tax mismatches
+-   What caused today's exceptions?
+
+## Input
+
+Placeholder:
+
+**Ask about transactions, settlements, exceptions...**
+
+AI answers must always visibly include evidence/citations and
+confidence.
+
+------------------------------------------------------------------------
+
+# 17. Audit Trail
+
+## Purpose
+
+Full immutable history for a case.
+
+## Header
+
+**Audit Trail**
+
+Subtitle:
+
+**Immutable history and decision record**
+
+## Filters
+
+-   Case ID
+-   Event type
+-   Actor
+-   Date range
+
+## Timeline
+
+Example:
+
+**09:42 --- Exception detected**
+
+Actor: FINCTRL AI
+
+Reason: FEE_MISMATCH
+
+------------------------------------------------------------------------
+
+**09:43 --- Evidence collected**
+
+Actor: FINCTRL AI
+
+7 supporting records attached
+
+------------------------------------------------------------------------
+
+**09:45 --- Hypothesis generated**
+
+Actor: FINCTRL AI
+
+Confidence: 94%
+
+------------------------------------------------------------------------
+
+**10:12 --- Investigation reviewed**
+
+Actor: Finance Analyst
+
+------------------------------------------------------------------------
+
+**10:15 --- Resolution approved**
+
+Actor: Finance Analyst
+
+Each event contains:
+
+-   timestamp
+-   actor
+-   event type
+-   description
+-   reference ID
+-   immutable event ID
+
+Clearly distinguish AI events from human events.
+
+------------------------------------------------------------------------
+
+# 18. Case Review
+
+## Purpose
+
+Human approves/rejects/escalates an AI recommendation.
+
+## Header
+
+**Case Review --- CASE-00241**
+
+Show:
+
+-   Open Exception
+-   Amount
+-   AI Confidence
+
+## Evidence Summary
+
+Display:
+
+**Order → Payment → Refund → Fee → Tax → Settlement → Bank**
+
+## AI Finding
+
+Example:
+
+**Settlement variance was caused by an incorrect fee adjustment.**
+
+Show:
+
+-   Confidence: 94%
+-   Evidence: 7 records
+-   Reason Code: FEE_MISMATCH
+
+## Recommended Action
+
+Example:
+
+**Approve correction of fee adjustment.**
+
+## Human Decision
+
+Prominent actions:
+
+-   Approve Resolution
+-   Reject
+-   Escalate
+
+Below:
+
+**Add review comment...**
+
+Also show:
+
+-   Reviewer
+-   Decision timestamp
+-   Previous decisions
+
+Critical distinction:
+
+> AI recommends. Human decides.
+
+Human actions must never visually appear to be AI-generated actions.
+
+------------------------------------------------------------------------
+
+# 19. Data Visualization Guidelines
+
+Use Recharts-style enterprise charts.
+
+### Line charts
+
+Use for:
+
+-   reconciliation trend
+-   cash trend
+-   variance trend
+
+### Stacked charts
+
+Use for:
+
+-   inflow/outflow/cash composition
+
+### Funnel
+
+Use for:
+
+-   exception progression
+
+### Sparklines
+
+Use for:
+
+-   compact KPI trends
+
+Charts should be:
+
+-   clean
+-   lightly gridded
+-   readable
+-   restrained
+-   data-first
+
+Avoid decorative chart effects.
+
+------------------------------------------------------------------------
+
+# 20. Financial Data Rules
+
+Always:
+
+-   right-align monetary values
+-   use INR where applicable
+-   use tabular figures
+-   clearly show positive/negative differences
+-   use consistent decimal formatting
+-   use concise large-number formatting where appropriate
+
+Examples:
+
+₹12.4M\
+₹842K\
+₹8,450\
+-₹650
+
+Business IDs should look realistic:
+
+ORD-00081\
+CASE-00241\
+TXN-004821\
+SETTLEMENT-00219
+
+Use fictional data only for mockups.
+
+------------------------------------------------------------------------
+
+# 21. AI Trust UX
+
+This is a core product requirement.
+
+Never show an AI conclusion alone.
+
+Whenever AI produces a conclusion, display:
+
+**Finding + Confidence + Evidence + Reason Code**
+
+Example:
+
+### AI Finding
+
+Settlement variance was caused by an incorrect fee adjustment.
+
+**94% confidence**
+
+**7 supporting records**
+
+`FEE_MISMATCH`
+
+**View Evidence →**
+
+This pattern should be reused throughout the application.
+
+------------------------------------------------------------------------
+
+# 22. Responsive Design
+
+Desktop is the primary experience.
+
+On smaller screens:
+
+-   collapse the sidebar into a navigation drawer
+-   stack KPI cards
+-   allow tables to scroll horizontally within their local container
+-   stack analysis panels
+-   preserve evidence graph readability
+-   never cause page-level horizontal overflow
+-   maintain accessible button/input sizes
+
+The primary financial information must remain visible and readable.
+
+------------------------------------------------------------------------
+
+# 23. Interaction Principles
+
+-   Clicking an exception opens investigation context.
+-   Clicking an evidence node reveals raw record details.
+-   Clicking an evidence chip opens the related case/record.
+-   Filters update tables without disrupting context.
+-   AI findings expose supporting evidence.
+-   Human approval actions require deliberate interaction.
+-   Loading, empty, error and success states are always designed.
+-   Avoid hidden essential functionality behind hover.
+
+------------------------------------------------------------------------
+
+# 24. Brand / Logo
+
+Use the FINCTRL-AI identity as a restrained enterprise fintech brand.
+
+Logo concept:
+
+-   geometric F-inspired mark
+-   financial growth/data-bar motif
+-   subtle circular control/evidence motif
+-   dark navy primary
+-   teal secondary
+-   clean FINCTRL-AI wordmark
+-   optional tagline:
+
+**YOUR AI FINANCIAL CONTROLLER**
+
+The logo must work in: - sidebar - login screen - browser/header
+context - presentation/demo screenshots
+
+Do not make the logo overly complex.
+
+------------------------------------------------------------------------
+
+# 25. Final Stitch Generation Direction
+
+Generate all screens as parts of one coherent enterprise application.
+
+The most important requirement is **visual consistency**.
+
+The following must remain consistent across every page:
+
+-   sidebar
+-   header
+-   typography
+-   colors
+-   spacing
+-   buttons
+-   status badges
+-   tables
+-   cards
+-   chart styling
+-   confidence meters
+-   evidence chips
+-   interaction states
+
+The final product should feel comparable to a sophisticated enterprise
+financial operations/control platform.
+
+### Product personality
+
+**Precise. Trustworthy. Analytical. Auditable. Calm. Enterprise-grade.**
+
+### Core message
+
+**FINCTRL-AI doesn't just tell finance teams what happened. It shows why
+it happened, what evidence supports it, how confident the AI is, and
+what action a human should take.**

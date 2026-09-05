@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FINCTRL-AI | Exceptions Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2d3133",
+                    "outline-variant": "#c5c6ce",
+                    "on-surface": "#191c1e",
+                    "primary": "#011127",
+                    "teal-dark": "#0E7F7B",
+                    "surface": "#FFFFFF",
+                    "secondary-fixed": "#dbe1ff",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-lowest": "#ffffff",
+                    "navy-dark": "#0F1B2D",
+                    "on-secondary-fixed": "#00174b",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-high": "#e6e8ea",
+                    "secondary-container": "#316bf3",
+                    "on-surface-variant": "#44474d",
+                    "text-muted": "#87919D",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "info": "#3B82F6",
+                    "primary-container": "#16263d",
+                    "warning": "#F59E0B",
+                    "on-primary-container": "#7e8da9",
+                    "surface-variant": "#e0e3e5",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "critical": "#EF4444",
+                    "inverse-primary": "#b7c7e5",
+                    "primary-fixed": "#d5e3ff",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f8f9fb",
+                    "on-tertiary": "#ffffff",
+                    "action-blue-light": "#EFF6FF",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#002b29",
+                    "action-blue-dark": "#1D4ED8",
+                    "on-background": "#191c1e",
+                    "on-primary-fixed-variant": "#384760",
+                    "outline": "#75777e",
+                    "on-primary-fixed": "#0b1c32",
+                    "success": "#10B981",
+                    "background": "#f8f9fb",
+                    "surface-container-low": "#f2f4f6",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b7c7e5",
+                    "tertiary-fixed-dim": "#60d9d3",
+                    "on-tertiary-container": "#009d98",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary": "#0051d5",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#00201f",
+                    "text-primary": "#17202A",
+                    "border-base": "#D9E0E7",
+                    "text-secondary": "#5E6875",
+                    "tertiary": "#001413",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#00504d",
+                    "on-secondary-container": "#fefcff",
+                    "surface-tint": "#505f79",
+                    "tertiary-fixed": "#7ef5ef",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "surface-secondary": "#F1F4F7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "body": ["Inter", "sans-serif"],
+                    "display": ["Hanken Grotesk", "sans-serif"],
+                    "brand": ["Be Vietnam Pro", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body h-screen overflow-hidden">
+<div class="flex h-full w-full">
+<!-- SideNavBar (Shared Component Identity) -->
+<aside class="w-sidebar-width flex-shrink-0 bg-primary flex flex-col border-r border-outline-variant h-full overflow-y-auto">
+<div class="p-base flex flex-col gap-4">
+<div class="flex gap-3 items-center py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDq-s6lOnR2QRoWlPw4oyqD74RJZRrZG61ip32ZEKIBQKEUdSCpyZzsMy0DH3_Fx75QRGS6JgniDZLRx-R7vvhvleVYHHUiGn2zZIusNL7J99F80i2t-jrPCivCByiaCQeaHhwVHlELjcEil-CdH_FLm-dh-0TBVDfVO7H3sgjFROaIVFZ75gkoztNtj7gdkWS4IjSYN4HD8vsVCwnmmm5ILNo_1d-kd24d8i0RGK5DTEsTTpNuv6k");'></div>
+<div class="flex flex-col">
+<h1 class="text-on-primary text-base font-medium leading-normal font-brand uppercase tracking-wider">FINCTRL-AI</h1>
+<p class="text-on-primary-container text-xs font-normal leading-normal">Enterprise Fintech</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:bg-primary-container rounded cursor-pointer transition-colors">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:bg-primary-container rounded cursor-pointer transition-colors">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<p class="text-sm font-medium">Reconciliation</p>
+</div>
+<!-- ACTIVE STATE -->
+<div class="flex items-center gap-3 px-3 py-2 bg-secondary text-on-secondary rounded cursor-pointer shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-sm font-medium">Exceptions</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:bg-primary-container rounded cursor-pointer transition-colors">
+<span class="material-symbols-outlined">description</span>
+<p class="text-sm font-medium">Reports</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:bg-primary-container rounded cursor-pointer transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:bg-primary-container rounded cursor-pointer transition-colors">
+<span class="material-symbols-outlined">security</span>
+<p class="text-sm font-medium">Audit</p>
+</div>
+</nav>
+</div>
+<div class="mt-auto p-base border-t border-primary-container">
+<div class="flex items-center gap-3 px-3 py-2 text-on-primary-container rounded cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<p class="text-sm font-medium">Support Center</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-background">
+<!-- TopAppBar (Shared Logic Implementation) -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-outline-variant bg-surface px-page-padding h-16 shrink-0">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-6 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<h2 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em] font-display uppercase">Exceptions</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-on-surface-variant cursor-pointer hover:text-secondary group transition-colors">
+<span class="text-sm font-medium leading-normal">Entity: Global Corp</span>
+<span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant cursor-pointer hover:text-secondary group transition-colors">
+<span class="text-sm font-medium leading-normal">Date: Oct 2023</span>
+<span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform">calendar_month</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex gap-3">
+<button class="size-10 flex items-center justify-center rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-outline-variant" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMdnAYoXZgIPkra1_AN9QRD4g43JFvhpKR1HTAkS5wiosb4tm_a1CYMEbqSl3YqdYPlJ_rzOexpfJ3cHK3d3VMGsdiGcoiyE10MtTspPTp9e4t9cKvMvCYrJ0zXeG-wfdL3Ub4a4nD8-lv2Bt4TZyjjVBIi3Vmk-uvLNR98cX7EZ2ipBlyeJEpciL1OlKABRrv8yfVgPMrLLxs4bS65DYEGmQMqBmrIh4oQ8o_0cnXvehGtW3XlW0");'></div>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<!-- Scrollable Content -->
+<div class="flex-1 flex flex-col overflow-y-auto custom-scrollbar p-page-padding gap-8">
+<!-- Header & Stats -->
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<h1 class="text-on-surface text-3xl font-extrabold tracking-tight font-display">Financial Exceptions</h1>
+<p class="text-text-secondary text-base max-w-2xl mt-1">Prioritize financial discrepancies and unresolved control exceptions across multi-entity operations.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<p class="text-text-muted text-xs font-semibold uppercase tracking-wider">Total Exceptions</p>
+<span class="material-symbols-outlined text-on-surface-variant text-lg">list_alt</span>
+</div>
+<p class="text-on-surface text-3xl font-black mt-2 font-display">47</p>
+<div class="flex items-center gap-1 mt-2 text-success">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span class="text-xs font-medium">-12% from last week</span>
+</div>
+</div>
+<div class="bg-surface border border-critical rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<p class="text-critical text-xs font-semibold uppercase tracking-wider">High Risk</p>
+<span class="material-symbols-outlined text-critical text-lg">priority_high</span>
+</div>
+<p class="text-on-surface text-3xl font-black mt-2 font-display">05</p>
+<div class="flex items-center gap-1 mt-2 text-critical">
+<span class="material-symbols-outlined text-sm">report</span>
+<span class="text-xs font-medium">Critical attention needed</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<p class="text-warning text-xs font-semibold uppercase tracking-wider">Medium Risk</p>
+<span class="material-symbols-outlined text-warning text-lg">warning</span>
+</div>
+<p class="text-on-surface text-3xl font-black mt-2 font-display">42</p>
+<div class="flex items-center gap-1 mt-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs font-medium">Review due within 48h</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<p class="text-text-muted text-xs font-semibold uppercase tracking-wider">Exception Value</p>
+<span class="material-symbols-outlined text-secondary text-lg">payments</span>
+</div>
+<p class="text-on-surface text-3xl font-black mt-2 font-display tabular-nums">₹1.24M</p>
+<div class="flex items-center gap-1 mt-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">info</span>
+<span class="text-xs font-medium">32% of total volume</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Breakdown & Filtering -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Distribution Chart -->
+<div class="lg:col-span-2 bg-surface border border-outline-variant rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-on-surface text-sm font-bold uppercase tracking-wider font-display">Exception Distribution by Category</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</div>
+<div class="space-y-4">
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium text-on-surface-variant">
+<span>Amount Mismatch (12)</span>
+<span>25%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[25%]"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium text-on-surface-variant">
+<span>Duplicate Transaction (9)</span>
+<span>19%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary/80 w-[19%]"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium text-on-surface-variant">
+<span>Missing Settlement (8)</span>
+<span>17%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary/70 w-[17%]"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium text-on-surface-variant">
+<span>Tax Mismatch (5)</span>
+<span>11%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-warning w-[11%]"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium text-on-surface-variant">
+<span>Timing Difference (7)</span>
+<span>15%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary/50 w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Highest Priority Card -->
+<div class="bg-primary text-on-primary rounded-xl p-6 relative overflow-hidden shadow-xl">
+<webgl-shader class="absolute inset-0 opacity-20 pointer-events-none" src="{{DATA:ANIMATION:ANIMATION_1}}"></webgl-shader>
+<div class="relative z-10">
+<h3 class="text-on-primary text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-critical text-sm">stars</span>
+                                Highest Priority
+                            </h3>
+<div class="space-y-4">
+<div class="p-3 bg-white/5 border border-white/10 rounded-lg backdrop-blur hover:bg-white/10 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs font-bold font-mono tracking-tighter">CASE-00241</span>
+<span class="px-2 py-0.5 rounded-full bg-critical text-[10px] font-black">HIGH</span>
+</div>
+<p class="text-sm font-semibold">Tax Mismatch Error</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-xs text-on-primary-container">Diff: -₹6,101.72</span>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+</div>
+<div class="p-3 bg-white/5 border border-white/10 rounded-lg backdrop-blur hover:bg-white/10 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs font-bold font-mono tracking-tighter">CASE-00238</span>
+<span class="px-2 py-0.5 rounded-full bg-warning text-on-tertiary-fixed text-[10px] font-black uppercase">Med</span>
+</div>
+<p class="text-sm font-semibold">Duplicate Settlement</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-xs text-on-primary-container">Diff: +₹12,400.00</span>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 rounded-lg bg-secondary text-on-secondary text-xs font-bold hover:brightness-110 transition-all uppercase tracking-wide">
+                                Resolve Critical (5)
+                            </button>
+</div>
+</div>
+</div>
+<!-- Operations Toolbar -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[320px]">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-secondary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all text-sm" placeholder="Search case, payment, order..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1">
+<select class="pl-4 pr-10 py-2 bg-surface border border-outline-variant rounded-lg text-sm font-medium focus:ring-0 focus:border-secondary cursor-pointer">
+<option>Reason Code</option>
+<option>TAX_MISMATCH</option>
+<option>DUPLICATE</option>
+</select>
+<select class="pl-4 pr-10 py-2 bg-surface border border-outline-variant rounded-lg text-sm font-medium focus:ring-0 focus:border-secondary cursor-pointer">
+<option>Risk: All</option>
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
+</select>
+<select class="pl-4 pr-10 py-2 bg-surface border border-outline-variant rounded-lg text-sm font-medium focus:ring-0 focus:border-secondary cursor-pointer">
+<option>Status</option>
+<option>Open</option>
+<option>Investigating</option>
+</select>
+<button class="px-4 py-2 bg-surface-container hover:bg-surface-container-high border border-outline-variant rounded-lg text-sm font-bold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">tune</span>
+                                More Filters
+                            </button>
+</div>
+</div>
+<!-- Exception Table -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider">Case ID</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider">Reason</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider">Reference</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider text-right">Difference</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider">Risk</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider text-center">Confidence</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 text-xs font-bold text-text-muted uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 font-mono text-sm font-bold text-secondary">CASE-00241</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-critical"></span>
+<span class="text-sm font-medium text-on-surface">TAX_MISMATCH</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">PAY-00102</td>
+<td class="px-6 py-4 text-sm font-semibold text-critical text-right tabular-nums">-₹6,101.72</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded bg-error-container text-on-error-container text-[10px] font-black uppercase">High</span>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="text-sm font-bold text-success">94%</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">
+<span class="size-1.5 rounded-full bg-info animate-pulse"></span>
+                                            Investigating
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-lg transition-all" title="Investigate">
+<span class="material-symbols-outlined text-lg">manage_search</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-success hover:bg-success/10 rounded-lg transition-all" title="Review">
+<span class="material-symbols-outlined text-lg">rate_review</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 font-mono text-sm font-bold text-secondary">CASE-00238</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-warning"></span>
+<span class="text-sm font-medium text-on-surface">DUPLICATE</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">PAY-00891</td>
+<td class="px-6 py-4 text-sm font-semibold text-on-surface text-right tabular-nums">+₹12,400.00</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded bg-warning/20 text-warning text-[10px] font-black uppercase">Med</span>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="text-sm font-bold text-success">98%</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">
+<span class="size-1.5 rounded-full bg-outline"></span>
+                                            Open
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-lg">manage_search</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-success hover:bg-success/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-lg">rate_review</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 font-mono text-sm font-bold text-secondary">CASE-00235</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-secondary"></span>
+<span class="text-sm font-medium text-on-surface">MISSING_SETTLEMENT</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">ORD-55219</td>
+<td class="px-6 py-4 text-sm font-semibold text-on-surface text-right tabular-nums">₹4,200.50</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded bg-secondary/20 text-secondary text-[10px] font-black uppercase">Med</span>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="text-sm font-bold text-warning">82%</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">
+<span class="size-1.5 rounded-full bg-outline"></span>
+                                            Open
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-lg">manage_search</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-success hover:bg-success/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-lg">rate_review</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="bg-surface-container-low px-6 py-4 border-t border-outline-variant flex items-center justify-between">
+<span class="text-xs text-text-secondary font-medium">Showing 1-10 of 47 exceptions</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded bg-surface border border-outline-variant text-xs font-bold disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1.5 rounded bg-surface border border-outline-variant text-xs font-bold hover:bg-surface-container transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Priority Insight Panel (Right Side) -->
+<div class="w-80 border-l border-outline-variant bg-surface hidden xl:flex flex-col overflow-y-auto">
+<div class="p-6 border-b border-outline-variant">
+<h3 class="text-sm font-black uppercase tracking-widest text-on-surface font-display mb-2">Priority Focus</h3>
+<p class="text-xs text-text-secondary leading-relaxed">System-generated high-value discrepancies requiring immediate auditor intervention.</p>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">psychology</span>
+<h4 class="text-xs font-bold text-on-surface uppercase tracking-wider">AI Insights</h4>
+</div>
+<div class="p-4 bg-action-blue-light rounded-xl border border-secondary/10">
+<p class="text-xs text-secondary leading-relaxed font-medium">
+                                "The tax mismatch in <span class="font-bold">CASE-00241</span> appears to be a systemic rounding error in the new Singapore node. Recommend immediate review of tax calculation logic."
+                            </p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-warning text-base">history</span>
+<h4 class="text-xs font-bold text-on-surface uppercase tracking-wider">Awaiting Review</h4>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:border-secondary transition-colors cursor-pointer">
+<div>
+<p class="text-[11px] font-bold text-secondary">CASE-00231</p>
+<p class="text-xs font-medium text-on-surface">Compliance Flag</p>
+</div>
+<span class="material-symbols-outlined text-sm text-text-muted">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:border-secondary transition-colors cursor-pointer">
+<div>
+<p class="text-[11px] font-bold text-secondary">CASE-00219</p>
+<p class="text-xs font-medium text-on-surface">Entity Mismatch</p>
+</div>
+<span class="material-symbols-outlined text-sm text-text-muted">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<div class="w-full h-40 rounded-xl bg-cover bg-center mb-4" data-alt="A sophisticated abstract technological background featuring clean lines, glowing nodes, and a palette of navy and white. The aesthetic is professional, modern enterprise fintech, symbolizing complex data systems working in harmony." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJmRl8Q4Djdc_XJJJ2Ab1Cir7WyXo5ZvgS1w8Gjammx5SkLYLW3gM9u2_KBmxLOYaK1_pPmW1U3QHErLkp5Q7ZiuCSaMlkonkApxIUzhuDbssQ5i0lTRteq3z5hCb4Ixj4farz6rEXGj2eEVykzrIOpg6kfB6enCvaKQI4m8hLXTTJKTFmLABGl567Ez_BuNiTsYiIsDr2qUQyjX68vfyxCtmWZenW7su5Rm20BHOtpENi_03Y440')"></div>
+<p class="text-[11px] text-center text-text-muted italic">Exceptions audit trail is encrypted and logged in REAL-TIME via FINCTRL-SECURE.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+    // Micro-interactions and subtle effects
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+        button.addEventListener('mouseup', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+
+    // High density table row highlight
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+            row.style.boxShadow = 'inset 4px 0 0 0 #0051d5';
+        });
+        row.addEventListener('mouseleave', () => {
+            row.style.boxShadow = 'none';
+        });
+    });
+</script>
+</body></html>

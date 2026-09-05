@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FINCTRL-AI - Reconciliation</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f2f4f6",
+                    "navy-dark": "#0F1B2D",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#002b29",
+                    "action-blue-light": "#EFF6FF",
+                    "tertiary-fixed": "#7ef5ef",
+                    "background": "#f8f9fb",
+                    "surface-tint": "#505f79",
+                    "on-tertiary-fixed": "#00201f",
+                    "on-tertiary-container": "#009d98",
+                    "primary-container": "#16263d",
+                    "tertiary": "#001413",
+                    "surface-container": "#eceef0",
+                    "on-background": "#191c1e",
+                    "secondary": "#0051d5",
+                    "secondary-container": "#316bf3",
+                    "inverse-primary": "#b7c7e5",
+                    "inverse-on-surface": "#eff1f3",
+                    "text-muted": "#87919D",
+                    "primary-fixed": "#d5e3ff",
+                    "surface-dim": "#d8dadc",
+                    "surface-bright": "#f8f9fb",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "text-primary": "#17202A",
+                    "on-primary-container": "#7e8da9",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface-variant": "#44474d",
+                    "on-primary-fixed": "#0b1c32",
+                    "action-blue-dark": "#1D4ED8",
+                    "surface-variant": "#e0e3e5",
+                    "info": "#3B82F6",
+                    "primary": "#011127",
+                    "surface-container-high": "#e6e8ea",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "surface-secondary": "#F1F4F7",
+                    "on-surface": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "teal-dark": "#0E7F7B",
+                    "border-base": "#D9E0E7",
+                    "outline-variant": "#c5c6ce",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2d3133",
+                    "surface-container-lowest": "#ffffff",
+                    "text-secondary": "#5E6875",
+                    "success": "#10B981",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#00504d",
+                    "on-secondary-container": "#fefcff",
+                    "warning": "#F59E0B",
+                    "on-primary-fixed-variant": "#384760",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-secondary-fixed": "#00174b",
+                    "outline": "#75777e",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#b7c7e5",
+                    "tertiary-fixed-dim": "#60d9d3",
+                    "critical": "#EF4444",
+                    "surface": "#FFFFFF"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "page-padding": "32px",
+                    "base": "8px",
+                    "sidebar-width": "240px",
+                    "compact-padding": "12px",
+                    "component-gap": "24px"
+            },
+            "fontFamily": {
+                    "body-table-bold": [
+                            "Inter"
+                    ],
+                    "caption": [
+                            "Inter"
+                    ],
+                    "kpi-primary": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-table": [
+                            "Inter"
+                    ],
+                    "page-title": [
+                            "Hanken Grotesk"
+                    ],
+                    "data-tabular": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ],
+                    "section-title": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "body-table-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "caption": [
+                            "11px",
+                            {
+                                    "lineHeight": "14px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "kpi-primary": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-table": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "page-title": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-tabular": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "section-title": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #F6F8FA; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="font-body-table text-body-table text-text-primary antialiased bg-background">
+<!-- SideNavBar -->
+<nav class="fixed h-screen w-[240px] left-0 top-0 bg-navy-dark flex flex-col h-full py-base z-50 md:flex hidden">
+<div class="px-gutter pb-component-gap">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-DEFAULT bg-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-navy-dark">account_balance</span>
+</div>
+<div>
+<h1 class="font-page-title text-page-title font-bold text-surface-container-lowest">FINCTRL-AI</h1>
+<p class="font-caption text-caption text-on-primary-container">Enterprise Finance</p>
+</div>
+</div>
+</div>
+<div class="px-gutter mb-component-gap">
+<button class="w-full bg-secondary text-on-secondary font-body-table-bold text-body-table-bold py-2 px-4 rounded-DEFAULT hover:bg-secondary-container transition-colors">
+                New Reconciliation
+            </button>
+</div>
+<ul class="flex flex-col gap-1 px-base">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container opacity-70 hover:bg-primary-container hover:opacity-100 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT bg-primary-container text-on-primary-container border-l-4 border-secondary-container opacity-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-secondary-container">account_balance</span>
+<span class="text-surface-container-lowest font-body-table-bold">Reconciliation</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container opacity-70 hover:bg-primary-container hover:opacity-100 transition-colors" href="#">
+<span class="material-symbols-outlined">search_check</span>
+<span>Investigation</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container opacity-70 hover:bg-primary-container hover:opacity-100 transition-colors" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span>Audit Trail</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container opacity-70 hover:bg-primary-container hover:opacity-100 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Settlements</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container opacity-70 hover:bg-primary-container hover:opacity-100 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 md:left-[240px] h-16 bg-surface border-b border-border-base flex justify-between items-center px-page-padding h-full w-full z-40">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-page-title text-page-title font-semibold text-primary md:hidden">FINCTRL-AI</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-text-secondary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<button class="text-text-secondary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-text-secondary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-border-base">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSgPjG8qWsJ76DiX91YUzZHWGE_nPrHhNoU5w65BC3X2xKvEjLgf4Ru7QdpNaP77LB6I_cA7qnHsV-aULzOEOs7cZLHN8gyNU3UoDuzvXUFeZl08U599f3nPbgV4NtObeD6Ij3IVUEaHGFmpbTNNmf7QYnhGWi409C6aQgyi8-t0RDvJxQrHxpO9IHhLxVkgqJ-gAK2-y3TESsYP6J8dTbSRacKBwNZYRaqISk6XnaeqMo9ppsx_8"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 md:pl-[272px] pr-page-padding pb-page-padding max-w-[1680px] mx-auto min-h-screen">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-component-gap flex-wrap gap-4">
+<div>
+<h1 class="font-page-title text-page-title text-primary mb-1">Reconciliation</h1>
+<p class="font-body-table text-body-table text-text-secondary">Browse and manage financial reconciliation cases.</p>
+</div>
+<button class="bg-action-blue-dark hover:bg-blue-800 text-on-secondary font-body-table-bold text-body-table-bold py-2 px-4 rounded-DEFAULT transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                Run Reconciliation
+            </button>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter mb-component-gap">
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted uppercase mb-2">Total Cases</span>
+<span class="font-kpi-primary text-kpi-primary text-primary">100</span>
+</div>
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Exact Matches</span>
+<span class="material-symbols-outlined text-success text-sm">check_circle</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-primary">53</span>
+<span class="font-caption text-caption text-success font-medium bg-success/10 px-2 py-0.5 rounded-full">53%</span>
+</div>
+</div>
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Requires Investigation</span>
+<span class="material-symbols-outlined text-warning text-sm">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-primary">47</span>
+<span class="font-caption text-caption text-warning font-medium bg-warning/10 px-2 py-0.5 rounded-full">47%</span>
+</div>
+</div>
+<div class="bg-surface border border-border-base rounded-lg p-compact-padding flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Escalated</span>
+<span class="material-symbols-outlined text-critical text-sm">error</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-primary text-kpi-primary text-primary">0</span>
+<span class="font-caption text-caption text-critical font-medium bg-critical/10 px-2 py-0.5 rounded-full">0%</span>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface border border-border-base rounded-t-lg p-compact-padding flex flex-wrap gap-4 items-center justify-between border-b-0">
+<div class="flex flex-wrap gap-3 flex-1">
+<div class="relative min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-sm">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 bg-surface border border-border-base rounded-DEFAULT font-body-table text-body-table focus:border-info focus:ring-1 focus:ring-info outline-none transition-colors" placeholder="Search case, payment, order..." type="text"/>
+</div>
+<select class="py-1.5 px-3 bg-surface border border-border-base rounded-DEFAULT font-body-table text-body-table text-text-secondary focus:border-info outline-none">
+<option>Status: All</option>
+<option>Mismatch</option>
+<option>Exact Match</option>
+<option>Review</option>
+</select>
+<select class="py-1.5 px-3 bg-surface border border-border-base rounded-DEFAULT font-body-table text-body-table text-text-secondary focus:border-info outline-none">
+<option>Reason Code: All</option>
+<option>TAX_MISMATCH</option>
+<option>AMOUNT_MISMATCH</option>
+</select>
+<button class="flex items-center gap-1 text-text-secondary hover:text-primary py-1.5 px-2 font-body-table-bold text-body-table-bold transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                    More Filters
+                </button>
+</div>
+<div class="flex gap-2">
+<button class="text-text-secondary hover:text-primary font-body-table-bold text-body-table-bold py-1.5 px-3 rounded-DEFAULT transition-colors">Clear</button>
+<button class="bg-surface border border-border-base text-primary font-body-table-bold text-body-table-bold py-1.5 px-3 rounded-DEFAULT hover:bg-surface-container-low transition-colors">Apply Filters</button>
+</div>
+</div>
+<!-- Main Data Table -->
+<div class="bg-surface border border-border-base rounded-b-lg overflow-x-auto mb-component-gap">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-secondary border-b border-border-base">
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Case ID</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Payment ID</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Order ID</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Status</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Reason Code</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium text-right whitespace-nowrap">Amount</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium text-right whitespace-nowrap">Difference</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Confidence</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium whitespace-nowrap">Review Status</th>
+<th class="py-2 px-compact-padding font-label-sm text-label-sm text-text-secondary font-medium text-right whitespace-nowrap">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-base">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<a class="font-data-tabular text-data-tabular text-action-blue-dark hover:underline flex items-center gap-1" href="#">
+                                CASE-00001 <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">PAY-00001</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">ORD-00001</td>
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-medium bg-warning/10 text-warning">
+                                Mismatch
+                            </span>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">TAX_MISMATCH</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary text-right">₹120,000.57</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-critical text-right">₹6,101.72</td>
+<td class="py-3 px-compact-padding whitespace-nowrap min-w-[120px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-action-blue-dark h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+<span class="font-data-tabular text-data-tabular text-text-secondary text-xs">90%</span>
+</div>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">Pending Review</td>
+<td class="py-3 px-compact-padding whitespace-nowrap text-right">
+<button class="bg-surface border border-border-base text-primary font-body-table-bold text-body-table-bold py-1 px-3 rounded-DEFAULT hover:bg-surface-container-low transition-colors text-xs">
+                                Investigate
+                            </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<a class="font-data-tabular text-data-tabular text-action-blue-dark hover:underline flex items-center gap-1" href="#">
+                                CASE-00002 <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">PAY-00002</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">ORD-00002</td>
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-medium bg-success/10 text-success">
+                                Exact Match
+                            </span>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">EXACT_MATCH</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary text-right">₹85,400.00</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-secondary text-right">₹0.00</td>
+<td class="py-3 px-compact-padding whitespace-nowrap min-w-[120px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-success h-1.5 rounded-full" style="width: 99%"></div>
+</div>
+<span class="font-data-tabular text-data-tabular text-text-secondary text-xs">99%</span>
+</div>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">—</td>
+<td class="py-3 px-compact-padding whitespace-nowrap text-right">
+<button class="text-action-blue-dark font-body-table-bold text-body-table-bold py-1 px-3 hover:underline transition-colors text-xs">
+                                View
+                            </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<a class="font-data-tabular text-data-tabular text-action-blue-dark hover:underline flex items-center gap-1" href="#">
+                                CASE-00003 <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">PAY-00003</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">ORD-00003</td>
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-medium bg-warning/10 text-warning">
+                                Mismatch
+                            </span>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">AMOUNT_MISMATCH</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary text-right">₹42,500.00</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-critical text-right">₹450.00</td>
+<td class="py-3 px-compact-padding whitespace-nowrap min-w-[120px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-action-blue-dark h-1.5 rounded-full" style="width: 85%"></div>
+</div>
+<span class="font-data-tabular text-data-tabular text-text-secondary text-xs">85%</span>
+</div>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">Pending Review</td>
+<td class="py-3 px-compact-padding whitespace-nowrap text-right">
+<button class="bg-surface border border-border-base text-primary font-body-table-bold text-body-table-bold py-1 px-3 rounded-DEFAULT hover:bg-surface-container-low transition-colors text-xs">
+                                Investigate
+                            </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<a class="font-data-tabular text-data-tabular text-action-blue-dark hover:underline flex items-center gap-1" href="#">
+                                CASE-00004 <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">PAY-00004</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary">ORD-00004</td>
+<td class="py-3 px-compact-padding whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-medium bg-info/10 text-info">
+                                Review
+                            </span>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">DUPLICATE_TRANSACTION</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-primary text-right">₹12,400.00</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-data-tabular text-data-tabular text-text-secondary text-right">—</td>
+<td class="py-3 px-compact-padding whitespace-nowrap min-w-[120px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-warning h-1.5 rounded-full" style="width: 72%"></div>
+</div>
+<span class="font-data-tabular text-data-tabular text-text-secondary text-xs">72%</span>
+</div>
+</td>
+<td class="py-3 px-compact-padding whitespace-nowrap font-body-table text-body-table text-text-secondary">Pending Review</td>
+<td class="py-3 px-compact-padding whitespace-nowrap text-right">
+<button class="bg-surface border border-border-base text-primary font-body-table-bold text-body-table-bold py-1 px-3 rounded-DEFAULT hover:bg-surface-container-low transition-colors text-xs">
+                                Review
+                            </button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Table Footer / Pagination -->
+<div class="bg-surface border-t border-border-base p-compact-padding flex justify-between items-center text-sm">
+<span class="font-body-table text-body-table text-text-secondary">Showing 1–10 of 100 cases</span>
+<div class="flex items-center gap-1">
+<button class="p-1 text-text-secondary hover:bg-surface-container-low rounded disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="px-2 py-1 bg-action-blue-light text-action-blue-dark font-body-table-bold rounded">1</button>
+<button class="px-2 py-1 text-text-secondary hover:bg-surface-container-low rounded">2</button>
+<button class="px-2 py-1 text-text-secondary hover:bg-surface-container-low rounded">3</button>
+<span class="px-2 py-1 text-text-secondary">...</span>
+<button class="px-2 py-1 text-text-secondary hover:bg-surface-container-low rounded">10</button>
+<button class="p-1 text-text-secondary hover:bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Status Badges -->
+<div class="flex flex-wrap gap-4 mt-8">
+<div class="flex items-center gap-2 bg-success/5 border border-success/20 px-3 py-1.5 rounded-full">
+<div class="w-2 h-2 rounded-full bg-success"></div>
+<span class="font-caption text-caption text-text-primary font-medium">Deterministic Reconciliation: <span class="text-success">Operational</span></span>
+</div>
+<div class="flex items-center gap-2 bg-success/5 border border-success/20 px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-success text-[14px]">verified_user</span>
+<span class="font-caption text-caption text-text-primary font-medium">Evidence Validation: <span class="text-success">Enabled</span></span>
+</div>
+<div class="flex items-center gap-2 bg-success/5 border border-success/20 px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-success text-[14px]">visibility</span>
+<span class="font-caption text-caption text-text-primary font-medium">Human Oversight: <span class="text-success">Enabled</span></span>
+</div>
+<div class="flex items-center gap-2 bg-success/5 border border-success/20 px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-success text-[14px]">list_alt</span>
+<span class="font-caption text-caption text-text-primary font-medium">Audit Logging: <span class="text-success">Enabled</span></span>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tax Matching | FINCTRL-AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "critical": "#EF4444",
+                        "text-secondary": "#5E6875",
+                        "outline-variant": "#c5c6ce",
+                        "on-secondary-fixed-variant": "#003ea8",
+                        "surface-bright": "#f8f9fb",
+                        "surface-secondary": "#F1F4F7",
+                        "warning": "#F59E0B",
+                        "teal-dark": "#0E7F7B",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-container": "#009d98",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "surface": "#FFFFFF",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#0b1c32",
+                        "on-background": "#191c1e",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#00504d",
+                        "on-error-container": "#93000a",
+                        "secondary": "#0051d5",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#60d9d3",
+                        "on-surface": "#191c1e",
+                        "on-primary-container": "#7e8da9",
+                        "secondary-fixed": "#dbe1ff",
+                        "navy-dark": "#0F1B2D",
+                        "text-primary": "#17202A",
+                        "primary": "#011127",
+                        "on-secondary-fixed": "#00174b",
+                        "surface-dim": "#d8dadc",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#44474d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "success": "#10B981",
+                        "surface-tint": "#505f79",
+                        "tertiary": "#001413",
+                        "action-blue-light": "#EFF6FF",
+                        "surface-container-low": "#f2f4f6",
+                        "outline": "#75777e",
+                        "surface-container": "#eceef0",
+                        "background": "#f8f9fb",
+                        "action-blue-dark": "#1D4ED8",
+                        "primary-fixed-dim": "#b7c7e5",
+                        "primary-container": "#16263d",
+                        "tertiary-fixed": "#7ef5ef",
+                        "border-base": "#D9E0E7",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "text-muted": "#87919D",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-container": "#002b29",
+                        "inverse-primary": "#b7c7e5",
+                        "secondary-container": "#316bf3",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#d5e3ff",
+                        "on-primary-fixed-variant": "#384760",
+                        "info": "#3B82F6",
+                        "surface-container-high": "#e6e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "section-title": ["Hanken Grotesk"],
+                        "page-title": ["Hanken Grotesk"],
+                        "data-tabular": ["Inter"],
+                        "body-table": ["Inter"],
+                        "caption": ["Inter"],
+                        "kpi-primary": ["Hanken Grotesk"],
+                        "label-sm": ["Inter"],
+                        "body-table-bold": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Hanken Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar (Shared Component Logic Inspired) -->
+<aside class="w-64 bg-primary text-white flex flex-col border-r border-outline-variant/10">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-on-secondary-container rounded flex items-center justify-center">
+<svg class="text-primary size-5" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<div>
+<h1 class="text-sm font-bold tracking-tight">FINCTRL-AI</h1>
+<p class="text-[10px] text-primary-fixed-dim uppercase tracking-widest opacity-70">Enterprise Fintech</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-2 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-primary-fixed-dim hover:bg-primary-container rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary-fixed-dim hover:bg-primary-container rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="receipt">receipt</span>
+<span class="text-sm font-medium">Invoices</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="rule">rule</span>
+<span class="text-sm font-medium">Tax Matching</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary-fixed-dim hover:bg-primary-container rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="book">book</span>
+<span class="text-sm font-medium">Ledger</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary-fixed-dim hover:bg-primary-container rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-container cursor-pointer">
+<div class="size-8 rounded-full overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a female financial controller in a minimalist corporate office setting with soft, natural lighting and a high-key enterprise aesthetic. The image features clean lines and a sophisticated atmosphere consistent with a modern fintech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn_AJtwqUGxL3gSvHBkfaiSMtUt5HRZlTEjzZs07duLIhMO3LGWnnpialE-cfArRsLLrg9IMtiT_Rk86yGpuCaeB6E77Z3ZH2zRibw23mgpPGn3M6sV6AcCoUo6F-3XWw3zRHtIK5pLRM5AvRRj2wQuFdZBI5dHCQhXIsrSsK4g2Tb-K7Q8Sm9WcwvQcp6xcgEL0zpBn2x4IBFhwy5PBFmxD6_5LgZqGJv4zl925Vy_e9jW8LJQtU"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-semibold truncate">Alex Rivera</p>
+<p class="text-[10px] text-primary-fixed-dim truncate">Admin Account</p>
+</div>
+<span class="material-symbols-outlined text-sm text-primary-fixed-dim" data-icon="settings">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-20 bg-surface border-b border-border-base flex items-center justify-between px-8 shrink-0">
+<div>
+<h2 class="text-page-title text-text-primary">Tax Matching</h2>
+<p class="text-sm text-text-secondary">Compare invoice tax records and identify tax discrepancies.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container rounded-lg px-3 py-1 border border-border-base">
+<span class="material-symbols-outlined text-sm text-warning" data-icon="sync" style="font-variation-settings: 'wght' 600;">sync</span>
+<span class="ml-2 text-[11px] font-bold text-text-secondary uppercase">Last sync: 14m ago</span>
+</div>
+<button class="bg-secondary hover:bg-action-blue-dark text-white px-5 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow">play_arrow</span>
+                    Run Tax Matching
+                </button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Summary KPI Cards -->
+<div class="grid grid-cols-4 gap-6">
+<div class="bg-surface p-6 rounded-xl border border-border-base shadow-sm">
+<p class="text-label-sm text-text-muted uppercase mb-2">Invoices Checked</p>
+<div class="flex items-baseline gap-2">
+<span class="text-kpi-primary text-text-primary">100</span>
+<span class="text-xs text-success font-medium">↑ 12%</span>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-base shadow-sm">
+<p class="text-label-sm text-text-muted uppercase mb-2">Exact Matches</p>
+<div class="flex items-baseline gap-2">
+<span class="text-kpi-primary text-success">95</span>
+<span class="text-xs text-text-muted font-medium">95.0% rate</span>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-base shadow-sm">
+<p class="text-label-sm text-text-muted uppercase mb-2">Mismatches</p>
+<div class="flex items-baseline gap-2">
+<span class="text-kpi-primary text-critical">5</span>
+<span class="text-xs text-critical font-medium">Attention req.</span>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-base shadow-sm">
+<p class="text-label-sm text-text-muted uppercase mb-2">Pending Review</p>
+<div class="flex items-baseline gap-2">
+<span class="text-kpi-primary text-warning">5</span>
+<span class="text-xs text-text-muted font-medium">Queued</span>
+</div>
+</div>
+</div>
+<!-- Distribution Bar -->
+<div class="bg-surface p-6 rounded-xl border border-border-base shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-section-title text-text-primary">Match Distribution</h3>
+<span class="text-xs text-text-muted">Breakdown of reconciliation status</span>
+</div>
+<div class="w-full h-8 flex rounded-full overflow-hidden bg-surface-container">
+<div class="h-full bg-success transition-all" style="width: 95%;" title="95 Exact Match"></div>
+<div class="h-full bg-warning transition-all" style="width: 5%;" title="5 Rate Mismatch"></div>
+</div>
+<div class="mt-6 flex flex-wrap gap-x-8 gap-y-4">
+<div class="flex items-center gap-2">
+<div class="size-2.5 rounded-full bg-success"></div>
+<span class="text-body-table text-text-secondary"><span class="font-bold text-text-primary">95</span> Exact Match</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2.5 rounded-full bg-warning"></div>
+<span class="text-body-table text-text-secondary"><span class="font-bold text-text-primary">5</span> Rate Mismatch</span>
+</div>
+<div class="flex items-center gap-2 opacity-40">
+<div class="size-2.5 rounded-full bg-critical"></div>
+<span class="text-body-table text-text-secondary"><span class="font-bold text-text-primary">0</span> Amount Mismatch</span>
+</div>
+<div class="flex items-center gap-2 opacity-40">
+<div class="size-2.5 rounded-full bg-blue-500"></div>
+<span class="text-body-table text-text-secondary"><span class="font-bold text-text-primary">0</span> Calculation Mismatch</span>
+</div>
+</div>
+</div>
+<!-- Main Listing Section -->
+<div class="bg-surface rounded-xl border border-border-base shadow-sm overflow-hidden flex flex-col">
+<!-- Table Filter Bar -->
+<div class="p-4 border-b border-border-base bg-surface-bright flex flex-wrap items-center gap-4">
+<div class="relative flex-1 min-w-[300px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border-base rounded-lg text-sm focus:ring-secondary focus:border-secondary transition-all" placeholder="Search invoice ID, vendor, or tax amount..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<select class="border border-border-base rounded-lg text-sm py-2 px-3 bg-surface focus:ring-secondary">
+<option>Match Status</option>
+<option>Exact Match</option>
+<option>Mismatch</option>
+</select>
+<select class="border border-border-base rounded-lg text-sm py-2 px-3 bg-surface focus:ring-secondary">
+<option>Tax Rate</option>
+<option>5%</option>
+<option>12%</option>
+<option>18%</option>
+</select>
+<button class="flex items-center gap-2 px-3 py-2 border border-border-base rounded-lg text-sm font-medium text-text-secondary hover:bg-surface-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_today">calendar_today</span>
+                            Date Range
+                        </button>
+<button class="flex items-center gap-2 px-3 py-2 border border-border-base rounded-lg text-sm font-medium text-text-secondary hover:bg-surface-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                            More Filters
+                        </button>
+</div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-left border-b border-border-base">
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold">Invoice ID</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold text-right">Invoice Tax</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold text-center">Tax Rate</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold text-right">Ledger Tax</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold text-right">Expected Tax</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold text-right">Difference</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold">Status</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold">Confidence</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold">Review</th>
+<th class="px-4 py-3 text-label-sm text-text-muted uppercase font-semibold">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-base">
+<tr class="hover:bg-surface-secondary/50 transition-colors bg-amber-50/20">
+<td class="px-4 py-4 text-body-table-bold text-text-primary">INV-00001</td>
+<td class="px-4 py-4 text-body-table text-text-primary text-right tabular-nums">₹18,305.17</td>
+<td class="px-4 py-4 text-body-table text-text-secondary text-center">18%</td>
+<td class="px-4 py-4 text-body-table text-text-primary text-right tabular-nums">₹12,203.45</td>
+<td class="px-4 py-4 text-body-table text-text-primary text-right tabular-nums font-semibold">₹18,305.17</td>
+<td class="px-4 py-4 text-body-table text-critical text-right tabular-nums font-medium">+ ₹6,101.72</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-warning/10 text-warning border border-warning/20">Rate Mismatch</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-container rounded-full overflow-hidden w-16">
+<div class="h-full bg-success" style="width: 90%;"></div>
+</div>
+<span class="text-[11px] font-bold text-text-secondary">90%</span>
+</div>
+</td>
+<td class="px-4 py-4 text-body-table text-warning font-medium">Required</td>
+<td class="px-4 py-4">
+<button class="text-secondary font-semibold text-sm hover:underline" onclick="toggleDetail()">View</button>
+</td>
+</tr>
+<!-- Multiple Row Placeholders -->
+<tr class="hover:bg-surface-secondary/50 transition-colors">
+<td class="px-4 py-4 text-body-table-bold text-text-primary">INV-00002</td>
+<td class="px-4 py-4 text-body-table text-text-primary text-right tabular-nums">₹4,250.00</td>
+<td class="px-4 py-4 text-body-table text-text-secondary text-center">5%</td>
+<td class="px-4 py-4 text-body-table text-text-primary text-right tabular-nums">₹4,250.00</td>
+<td class="px-4 py-4 text-body-table text-text-primary text-right tabular-nums font-semibold">₹4,250.00</td>
+<td class="px-4 py-4 text-body-table text-success text-right tabular-nums font-medium">₹0.00</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-success/10 text-success border border-success/20">Exact Match</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-container rounded-full overflow-hidden w-16">
+<div class="h-full bg-success" style="width: 100%;"></div>
+</div>
+<span class="text-[11px] font-bold text-text-secondary">100%</span>
+</div>
+</td>
+<td class="px-4 py-4 text-body-table text-text-muted">Completed</td>
+<td class="px-4 py-4">
+<button class="text-secondary font-semibold text-sm hover:underline">View</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-4 border-t border-border-base flex items-center justify-between bg-surface-bright">
+<p class="text-xs text-text-muted">Showing 1 to 10 of 100 results</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-border-base rounded text-xs font-medium bg-surface text-text-secondary disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-border-base rounded text-xs font-medium bg-secondary text-white">1</button>
+<button class="px-3 py-1 border border-border-base rounded text-xs font-medium bg-surface text-text-secondary">2</button>
+<button class="px-3 py-1 border border-border-base rounded text-xs font-medium bg-surface text-text-secondary">3</button>
+<button class="px-3 py-1 border border-border-base rounded text-xs font-medium bg-surface text-text-secondary">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Detail Panel (Initially hidden, toggleable) -->
+<div class="w-[450px] bg-surface border-l border-border-base flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out absolute right-0 inset-y-0 z-50 shadow-2xl" id="detail-panel">
+<div class="p-6 border-b border-border-base flex items-center justify-between shrink-0">
+<div>
+<h3 class="text-lg font-bold text-text-primary">Mismatch Details</h3>
+<p class="text-xs text-text-secondary">Invoice: INV-00001</p>
+</div>
+<button class="size-8 flex items-center justify-center hover:bg-surface-secondary rounded-full" onclick="toggleDetail()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Summary Status -->
+<div class="p-4 bg-warning/5 border border-warning/20 rounded-lg flex items-start gap-3">
+<span class="material-symbols-outlined text-warning mt-1" data-icon="error">error</span>
+<div>
+<p class="text-sm font-bold text-text-primary">Human Review Required</p>
+<p class="text-xs text-text-secondary leading-relaxed mt-1">The system identified a variance in the tax rate applied. Manual verification of the source ledger is recommended.</p>
+<button class="mt-3 px-4 py-1.5 bg-warning text-on-tertiary-fixed font-bold text-xs rounded-lg shadow-sm">Open Review Tool</button>
+</div>
+</div>
+<!-- Comparison Table -->
+<div>
+<h4 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Comparison Breakdown</h4>
+<div class="space-y-2">
+<div class="grid grid-cols-3 text-[11px] font-bold text-text-muted px-2">
+<div>Metric</div>
+<div class="text-right">Invoice</div>
+<div class="text-right">Ledger</div>
+</div>
+<div class="grid grid-cols-3 p-3 bg-surface-container rounded-lg items-center">
+<div class="text-xs font-medium text-text-primary">Taxable Amount</div>
+<div class="text-xs text-right tabular-nums">₹1,01,695.39</div>
+<div class="text-xs text-right tabular-nums">₹1,01,695.39</div>
+</div>
+<div class="grid grid-cols-3 p-3 bg-warning/10 border border-warning/20 rounded-lg items-center">
+<div class="text-xs font-bold text-text-primary">Tax Rate</div>
+<div class="text-xs text-right tabular-nums">18.00%</div>
+<div class="text-xs text-right tabular-nums font-bold text-critical">12.00%</div>
+</div>
+<div class="grid grid-cols-3 p-3 bg-surface-container rounded-lg items-center">
+<div class="text-xs font-medium text-text-primary">Tax Amount</div>
+<div class="text-xs text-right tabular-nums">₹18,305.17</div>
+<div class="text-xs text-right tabular-nums">₹12,203.45</div>
+</div>
+</div>
+</div>
+<!-- Evidence Section -->
+<div>
+<h4 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Supporting Evidence</h4>
+<div class="grid grid-cols-1 gap-3">
+<div class="border border-border-base rounded-lg p-3 flex items-center justify-between hover:bg-surface-secondary cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary" data-icon="description">description</span>
+<div>
+<p class="text-xs font-bold text-text-primary">Invoice Record</p>
+<p class="text-[10px] text-text-muted">PDF Extract • 1.2MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-sm text-text-muted" data-icon="open_in_new">open_in_new</span>
+</div>
+<div class="border border-border-base rounded-lg p-3 flex items-center justify-between hover:bg-surface-secondary cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<div>
+<p class="text-xs font-bold text-text-primary">Tax Record</p>
+<p class="text-[10px] text-text-muted">ERP Sync #4920</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-sm text-text-muted" data-icon="open_in_new">open_in_new</span>
+</div>
+<div class="border border-border-base rounded-lg p-3 flex items-center justify-between hover:bg-surface-secondary cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary" data-icon="gavel">gavel</span>
+<div>
+<p class="text-xs font-bold text-text-primary">Matching Rule</p>
+<p class="text-[10px] text-text-muted">Standard GST-18-India</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-sm text-text-muted" data-icon="settings">settings</span>
+</div>
+</div>
+</div>
+<!-- Rule Calculation Logic -->
+<div class="p-4 bg-navy-dark text-white rounded-xl">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-blue-400 text-sm" data-icon="calculate">calculate</span>
+<h4 class="text-[11px] font-bold uppercase tracking-widest text-blue-200">System Calculation</h4>
+</div>
+<div class="space-y-1 font-mono text-[11px]">
+<p class="text-slate-400"># Rule Engine Verdict</p>
+<p><span class="text-blue-400">TAX_AMT</span> = <span class="text-teal-400">BASE_VAL</span> * <span class="text-teal-400">RATE</span></p>
+<p><span class="text-slate-300">₹18,305.17 = ₹1,01,695.39 * 0.18</span></p>
+<p class="text-critical font-bold mt-2">! LEDGER_RATE (0.12) != INVOICE_RATE (0.18)</p>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-border-base bg-surface-bright shrink-0 flex gap-3">
+<button class="flex-1 bg-surface border border-border-base text-text-primary font-bold text-sm py-2 rounded-lg hover:bg-surface-container transition-all">Reject Matching</button>
+<button class="flex-1 bg-secondary text-white font-bold text-sm py-2 rounded-lg shadow-sm hover:bg-action-blue-dark transition-all">Confirm Mismatch</button>
+</div>
+</div>
+</div>
+<script>
+    function toggleDetail() {
+        const panel = document.getElementById('detail-panel');
+        if (panel.classList.contains('translate-x-full')) {
+            panel.classList.remove('translate-x-full');
+            panel.classList.add('translate-x-0');
+        } else {
+            panel.classList.remove('translate-x-0');
+            panel.classList.add('translate-x-full');
+        }
+    }
+
+    // Interaction for side-panel and rows
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+                toggleDetail();
+            }
+        });
+    });
+</script>
+</body></html>

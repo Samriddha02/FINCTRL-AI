@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FINCTRL-AI - Finance Q&amp;A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "secondary": "#0051d5",
+                      "navy-dark": "#0F1B2D",
+                      "outline": "#75777e",
+                      "text-primary": "#17202A",
+                      "outline-variant": "#c5c6ce",
+                      "secondary-container": "#316bf3",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "tertiary-container": "#002b29",
+                      "surface-container-lowest": "#ffffff",
+                      "success": "#10B981",
+                      "border-base": "#D9E0E7",
+                      "on-surface": "#191c1e",
+                      "surface-container-high": "#e6e8ea",
+                      "on-primary-container": "#7e8da9",
+                      "on-surface-variant": "#44474d",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "surface-container-low": "#f2f4f6",
+                      "on-primary-fixed": "#0b1c32",
+                      "critical": "#EF4444",
+                      "info": "#3B82F6",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface": "#FFFFFF",
+                      "surface-dim": "#d8dadc",
+                      "action-blue-dark": "#1D4ED8",
+                      "text-secondary": "#5E6875",
+                      "surface-secondary": "#F1F4F7",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#384760",
+                      "surface-bright": "#f8f9fb",
+                      "background": "#f8f9fb",
+                      "tertiary-fixed": "#7ef5ef",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#b7c7e5",
+                      "tertiary-fixed-dim": "#60d9d3",
+                      "surface-tint": "#505f79",
+                      "action-blue-light": "#EFF6FF",
+                      "inverse-primary": "#b7c7e5",
+                      "primary-container": "#16263d",
+                      "tertiary": "#001413",
+                      "on-secondary-fixed-variant": "#003ea8",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-container": "#fefcff",
+                      "secondary-fixed": "#dbe1ff",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#00201f",
+                      "warning": "#F59E0B",
+                      "on-tertiary-fixed-variant": "#00504d",
+                      "on-background": "#191c1e",
+                      "on-secondary-fixed": "#00174b",
+                      "text-muted": "#87919D",
+                      "primary-fixed": "#d5e3ff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-container": "#009d98",
+                      "primary": "#011127",
+                      "inverse-on-surface": "#eff1f3",
+                      "teal-dark": "#0E7F7B"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "compact-padding": "12px",
+                      "sidebar-width": "240px",
+                      "base": "8px",
+                      "component-gap": "24px",
+                      "page-padding": "32px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-table": [
+                              "Inter"
+                      ],
+                      "data-tabular": [
+                              "Inter"
+                      ],
+                      "body-table-bold": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ],
+                      "kpi-primary": [
+                              "Hanken Grotesk"
+                      ],
+                      "page-title": [
+                              "Hanken Grotesk"
+                      ],
+                      "section-title": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-table": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-tabular": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-table-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "caption": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "kpi-primary": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "page-title": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "section-title": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-text-primary antialiased font-body-table flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 w-sidebar-width z-50 overflow-y-auto bg-navy-dark dark:bg-navy-dark text-on-primary dark:text-on-primary font-section-title text-section-title flat no shadows">
+<div class="px-gutter py-component-gap border-b border-[#1A2C46]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-action-blue-dark rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 18px;">analytics</span>
+</div>
+<div>
+<h1 class="font-page-title text-page-title font-bold text-on-primary leading-tight tracking-tight">FINCTRL-AI</h1>
+<p class="font-caption text-caption text-on-primary-container">Enterprise Finance</p>
+</div>
+</div>
+<button class="w-full mt-6 bg-action-blue-dark hover:bg-secondary transition-colors text-on-primary font-body-table-bold py-2 px-4 rounded-DEFAULT flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                New Analysis
+            </button>
+</div>
+<ul class="flex flex-col py-4 px-2 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">account_balance_wallet</span>
+<span>Reconciliation</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">troubleshoot</span>
+<span>Investigation</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">report_problem</span>
+<span>Exceptions</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">timeline</span>
+<span>Cash Forecast</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">receipt_long</span>
+<span>Tax Matching</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT bg-secondary-container text-on-secondary-container font-semibold opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">contact_support</span>
+<span>Finance Q&amp;A</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">history_edu</span>
+<span>Audit Trail</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">assignment_turned_in</span>
+<span>Case Review</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container hover:text-on-primary hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-[240px] w-[calc(100%-240px)]">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-page-padding bg-surface dark:bg-surface text-primary dark:text-primary font-label-sm text-label-sm border-b border-border-base flat no shadows docked full-width top-0 sticky z-40 shrink-0">
+<div class="flex items-center gap-6">
+<!-- Navigation Links Area -->
+<nav class="flex gap-4">
+<button class="text-text-secondary hover:text-secondary transition-colors font-body-table-bold">Entity Selector</button>
+<button class="text-text-secondary hover:text-secondary transition-colors font-body-table-bold">Date Range</button>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="notifications" class="text-text-secondary hover:text-secondary transition-colors p-1">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="help_outline" class="text-text-secondary hover:text-secondary transition-colors p-1">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-border-base overflow-hidden border border-border-base ml-2">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A highly detailed close up corporate headshot portrait of a professional in a bright modern office with soft white light. Professional, sharp, neutral expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl0zjV_zL7xW2WtEOWY2z4v2Es0B09SIXwVsxN5KLxtS1NdMvBl2dzDRyQwDJk9rnpHlyBZmyzvNBfIgA6Q857XXStDisnhzKQhwQIRNd30U3MEaBhNdohUAKO9PkiGcOeYC0FMh71iM_audeQznF9-kx5H7tzh94WPochCfFf1nNaQYCSGaokbb_aCjDHFZKzaTHNyi4t2ZY5m3-VTmqZAgIf6eIXuKrCKt6uNxI7O5xBTFhSMmw"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 overflow-y-auto p-page-padding bg-background relative">
+<div class="max-w-[1024px] mx-auto flex flex-col gap-component-gap">
+<!-- Query Header & Input Section -->
+<section class="bg-surface border border-border-base rounded-lg p-6 shadow-sm">
+<h2 class="font-section-title text-section-title text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-action-blue-dark">robot_2</span>
+                        Finance Q&amp;A Assistant
+                    </h2>
+<div class="flex gap-3 mb-4">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border-base rounded-DEFAULT bg-background focus:outline-none focus:border-action-blue-dark focus:ring-1 focus:ring-action-blue-dark font-body-table text-text-primary transition-colors" placeholder="Ask a question about your financial data..." type="text" value="Why is CASE-00001 mismatched?"/>
+</div>
+<button class="bg-action-blue-dark hover:bg-secondary text-on-primary font-body-table-bold px-6 py-2 rounded-DEFAULT transition-colors whitespace-nowrap shadow-sm">
+                            Ask
+                        </button>
+</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="font-label-sm text-text-secondary mr-2">Suggested:</span>
+<button class="px-3 py-1 bg-surface-secondary border border-border-base rounded-full font-label-sm text-text-primary hover:border-action-blue-dark hover:text-action-blue-dark transition-colors">Payment status</button>
+<button class="px-3 py-1 bg-surface-secondary border border-border-base rounded-full font-label-sm text-text-primary hover:border-action-blue-dark hover:text-action-blue-dark transition-colors">Refund summary</button>
+<button class="px-3 py-1 bg-surface-secondary border border-border-base rounded-full font-label-sm text-text-primary hover:border-action-blue-dark hover:text-action-blue-dark transition-colors">Settlement status</button>
+<button class="px-3 py-1 bg-surface-secondary border border-border-base rounded-full font-label-sm text-text-primary hover:border-action-blue-dark hover:text-action-blue-dark transition-colors">Tax comparison</button>
+<button class="px-3 py-1 bg-surface-secondary border border-border-base rounded-full font-label-sm text-text-primary hover:border-action-blue-dark hover:text-action-blue-dark transition-colors">Cash forecast</button>
+</div>
+</section>
+<!-- Main Answer Card -->
+<section class="bg-surface border border-border-base rounded-lg shadow-sm overflow-hidden flex flex-col md:flex-row">
+<!-- Left: Answer Content -->
+<div class="flex-1 p-6 md:border-r border-border-base">
+<div class="flex items-center gap-2 mb-4 text-text-secondary font-label-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Analysis Complete</span>
+</div>
+<p class="font-body-table text-text-primary leading-relaxed mb-6">
+                            CASE-00001 is classified as a <span class="font-data-tabular font-bold text-error bg-error-container/30 px-1 py-0.5 rounded">TAX_MISMATCH</span>. 
+                            The invoice tax is <span class="font-data-tabular text-primary font-semibold">₹18,305.17</span> while the tax record contains 
+                            <span class="font-data-tabular text-primary font-semibold">₹12,203.45</span>, producing a difference of 
+                            <span class="font-data-tabular text-error font-bold">₹6,101.72</span>.
+                        </p>
+<div class="pt-4 border-t border-border-base">
+<h3 class="font-label-sm text-text-secondary mb-3 uppercase tracking-wider">Source Evidence</h3>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-3 py-1.5 border border-border-base bg-surface-secondary rounded-DEFAULT hover:border-action-blue-dark hover:bg-action-blue-light transition-colors group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-action-blue-dark text-[18px]">receipt</span>
+<span class="font-data-tabular text-text-primary group-hover:text-action-blue-dark">INV-00001</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-border-base bg-surface-secondary rounded-DEFAULT hover:border-action-blue-dark hover:bg-action-blue-light transition-colors group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-action-blue-dark text-[18px]">receipt_long</span>
+<span class="font-data-tabular text-text-primary group-hover:text-action-blue-dark">TAX-00001</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-border-base bg-surface-secondary rounded-DEFAULT hover:border-action-blue-dark hover:bg-action-blue-light transition-colors group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-action-blue-dark text-[18px]">assignment_late</span>
+<span class="font-data-tabular text-text-primary group-hover:text-action-blue-dark">CASE-00001</span>
+</button>
+</div>
+</div>
+<div class="mt-6 flex gap-3">
+<button class="bg-surface border border-border-base text-text-primary hover:border-text-primary font-body-table-bold px-4 py-1.5 rounded-DEFAULT transition-colors shadow-sm text-sm">
+                                View Case
+                            </button>
+<button class="bg-surface border border-border-base text-text-primary hover:border-text-primary font-body-table-bold px-4 py-1.5 rounded-DEFAULT transition-colors shadow-sm text-sm">
+                                Open Audit Trail
+                            </button>
+</div>
+</div>
+<!-- Right: Metadata Sidebar -->
+<div class="w-full md:w-[280px] bg-surface-bright p-6 flex flex-col gap-4">
+<h3 class="font-label-sm text-text-secondary uppercase tracking-wider mb-2">Query Metadata</h3>
+<div class="flex justify-between items-start border-b border-border-base pb-2">
+<span class="font-label-sm text-text-secondary">Type</span>
+<span class="font-data-tabular text-text-primary text-right bg-surface-secondary px-2 py-0.5 rounded text-xs">RECONCILIATION_QUERY</span>
+</div>
+<div class="flex justify-between items-center border-b border-border-base pb-2">
+<span class="font-label-sm text-text-secondary">Sources</span>
+<span class="font-data-tabular text-text-primary font-semibold">3</span>
+</div>
+<div class="flex justify-between items-center border-b border-border-base pb-2">
+<span class="font-label-sm text-text-secondary">Validation</span>
+<span class="font-label-sm text-success bg-success/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span> Validated
+                            </span>
+</div>
+<div class="flex justify-between items-center pb-2">
+<span class="font-label-sm text-text-secondary">Timestamp</span>
+<span class="font-data-tabular text-text-primary">09:45 AM</span>
+</div>
+<div class="mt-auto pt-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-teal-dark text-[18px]">hub</span>
+<span class="font-label-sm text-primary font-semibold">AI Confidence Level</span>
+</div>
+<div class="w-full bg-border-base rounded-full h-1.5 mb-1">
+<div class="bg-teal-dark h-1.5 rounded-full" style="width: 98%"></div>
+</div>
+<div class="text-right font-data-tabular text-text-secondary text-xs">98%</div>
+</div>
+</div>
+</section>
+<!-- Additional States / Edge Cases Preview -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Needs Clarification State -->
+<div class="bg-surface border border-warning/30 rounded-lg p-4 shadow-sm flex items-start gap-3">
+<span class="material-symbols-outlined text-warning mt-0.5">info</span>
+<div>
+<h4 class="font-body-table-bold text-primary mb-1">Clarification Needed</h4>
+<p class="font-body-table text-text-secondary text-sm mb-3">"I need more information to answer this question. Please specify the date range for the requested reconciliation period."</p>
+<button class="text-action-blue-dark font-body-table-bold text-sm hover:underline">Update Query</button>
+</div>
+</div>
+<!-- Unsupported State -->
+<div class="bg-surface border border-border-base rounded-lg p-4 shadow-sm flex items-start gap-3 opacity-75">
+<span class="material-symbols-outlined text-text-muted mt-0.5">block</span>
+<div>
+<h4 class="font-body-table-bold text-primary mb-1">Unsupported Scope</h4>
+<p class="font-body-table text-text-secondary text-sm">"This question is outside the supported finance data scope. Please restrict queries to reconciliations, tax matching, or forecasting."</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
