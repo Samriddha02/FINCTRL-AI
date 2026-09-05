@@ -1,7 +1,6 @@
 # FINCTRL-AI
 
-## Live Demo - https://finctrl-ai.netlify.app](https://finctrl-ai.netlify.app/login
-
+## Live Demo - https://finctrl-ai.netlify.app/login
 **FINCTRL‑AI** is an AI‑augmented finance‑controller platform that helps close finance‑operations loops by providing deterministic reconciliation, AI‑driven exception investigation, human‑in‑the‑loop review, grounded finance Q&A, cash‑forecasting, tax‑line matching, and full auditability.
 
 ---
